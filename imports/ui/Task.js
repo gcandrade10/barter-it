@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import { Tasks } from '../api/tasks.js';
 import { Meteor } from 'meteor/meteor';
+import { Tasks } from '../api/tasks.js';
 export default class Task extends Component{
 
 	toggleChecked() {
