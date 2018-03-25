@@ -32,6 +32,77 @@ export default class Trade extends Component{
   		//id_to,offers_ids,money,target_id
   	}
 
+  	delete()
+  	{
+  		alert("delete");
+  	}
+
+  	info()
+  	{
+  		alert("info");
+  	}
+
+  	renderTrade()
+  	{
+  		if(this.props.actionButtons)
+		{
+	  					return(<div className="container">
+				            <div className="row">
+				              <div className="container">
+				                <div className="row">
+				                  <div className="col-2">
+				                    Otro
+				                  </div>
+				                </div>
+				                <div className="row">
+				                  <div className="col-1"></div>
+				                  <div className="col-2">
+				                    Quiere:
+				                  </div>
+				                  <div className="col-4">
+				                    {this.props.trade.target_id}
+				                  </div>
+				                  <div className="col-2">
+				                    <button type="button"  onClick={this.toggleModal.bind(this)}>detail</button>
+				                  </div>
+				                </div>
+				              </div>
+				            </div>
+        				</div>);
+		}
+	  				else
+	  				{
+			  			return(
+			  				<div className="container">
+			  					<div className="row">
+						  			<div className="col-4">
+										{this.props.trade.target_id}
+									</div>
+									<div className="col-2">
+										{this.props.trade.state}
+									</div>
+									<div className="col-2">
+				                    	{this.renderDelOrInfo()}
+				                  </div>
+			  					</div>
+			  					
+			  				</div>);
+	  				}
+  	}
+
+  	renderDelOrInfo()
+  	{
+  		//alert(this.props.trade.state);
+  		if(this.props.trade.state==="rejected")
+  		{
+  			return(<button type="button"  onClick={this.delete.bind(this)}>x</button>);
+  		}
+  		else
+  		{
+  			return(<button type="button"  onClick={this.info.bind(this)}>info</button>);
+  		}
+  	}
+
 	render(){
 		return( 
 			<div>
@@ -48,15 +119,12 @@ export default class Trade extends Component{
 				    onCounteroffer={this.showDialogMakeOfer.bind(this)}
 				    onClose={this.toggleModal.bind(this)}
 	  				> 	
-	  			</Modal>
-				
-				<span>
-					{this.props.trade.target_id}
-				</span>
-				<span>
-					{this.props.trade.state}
-				</span>
-				<button type="button"  onClick={this.toggleModal.bind(this)}>detail</button>
+	  			</Modal>	
+
+	  			{
+	  			this.renderTrade()	
+	  			}
+
 			</div>
 			);
 	}

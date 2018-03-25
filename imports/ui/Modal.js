@@ -31,6 +31,51 @@ export default class Modal extends Component
           </div>
           <div className="modal-body">
             {this.props.children}
+                        <div className="container">
+              <div className="row">
+                <div className="col-2">
+                  Otro
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-1"></div>
+                <div className="col-2">
+                  Quiere:
+                </div>
+                <div className="col-2">
+                  target
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-1"></div>
+                <div className="col-2">
+                  Ofrece:
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-2"></div>
+                Productos:
+                <div className="container">
+                  <div className="row">
+                    <div className="col-3"></div>
+                    <div className="col-2">
+                      Producto1
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-3"></div>
+                    <div className="col-2">
+                      Producto1
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-2"></div>
+                <div className="col-2">Dinero:</div>
+                <div className="col-1">$0</div>
+              </div>
+            </div>
           </div>
           {this.renderFooter()}
         </div>
