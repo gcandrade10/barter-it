@@ -39,5 +39,6 @@ Meteor.methods({
     check(state, String);
  
     TradesDB.update(tradeId, { $set: { state: state } });
+    TradesDB.update(tradeId, { $set: { responded: true } });
   }
 });

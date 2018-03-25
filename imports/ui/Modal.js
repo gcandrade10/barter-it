@@ -4,8 +4,13 @@ import "./modal.css";
 export default class Modal extends Component
 {
   renderFooter(){
-
-    if(this.props.footer){
+    if(this.props.responded)
+    {
+      return <div className="modal-footer">
+      <button  onClick={this.props.onContact}>{this.props.contactLabel}</button>
+      </div>
+    }
+    else if(this.props.footer){
       return <div className="modal-footer">
       <button  onClick={this.props.onDeal}>{this.props.dealLabel}</button>
       <button  onClick={this.props.onReject}>{this.props.rejectLabel}</button>

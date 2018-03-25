@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import { Meteor } from 'meteor/meteor';
 import { TradesDB } from '../api/trades.js';
 import Modal from './Modal.js';
+import '../stylesheets/trade.css';
+import classNames from 'classnames';
 export default class Trade extends Component{
 	constructor(props)
 	{
@@ -27,8 +29,8 @@ export default class Trade extends Component{
   	}
   	showDialogMakeOfer()
   	{
-  		Meteor.call('trades.insert', "4ngJckRYJnYrHvfh7",["oferta1","oferta2"],0,"productoDeInteres");
-  		Meteor.call('trades.insert', "59mNYcQoHgLJXYNj8",["oferta1","oferta2"],0,"productoDeInteres");
+  		Meteor.call('trades.insert', "svghRtLu92pcvZ7JN",["oferta1","oferta2"],0,"productoDeInteres");
+  		Meteor.call('trades.insert', "xbLjgqfDWvdy7G83e",["oferta1","oferta2"],0,"productoDeInteres");
   		//id_to,offers_ids,money,target_id
   	}
 
@@ -42,13 +44,24 @@ export default class Trade extends Component{
   		alert("info");
   	}
 
+  	showContact()
+  	{
+  		alert("showContact");
+  	}
+
   	renderTrade()
   	{
+  		var stateClassName = classNames({
+  		  "container":true,	
+	      "accepted": this.props.trade.state==="accepted",
+	      "pending": this.props.trade.state==="pending",
+	      "rejected": this.props.trade.state==="rejected"
+    });
   		if(this.props.actionButtons)
 		{
 	  					return(<div className="container">
 				            <div className="row">
-				              <div className="container">
+				              <div className={stateClassName}>
 				                <div className="row">
 				                  <div className="col-2">
 				                    Otro
@@ -63,7 +76,7 @@ export default class Trade extends Component{
 				                    {this.props.trade.target_id}
 				                  </div>
 				                  <div className="col-2">
-				                    <button type="button"  onClick={this.toggleModal.bind(this)}>detail</button>
+				                    {this.renderDelOrInfo()}
 				                  </div>
 				                </div>
 				              </div>
@@ -73,7 +86,7 @@ export default class Trade extends Component{
 	  				else
 	  				{
 			  			return(
-			  				<div className="container">
+			  				<div className={stateClassName}>
 			  					<div className="row">
 						  			<div className="col-4">
 										{this.props.trade.target_id}
@@ -97,6 +110,10 @@ export default class Trade extends Component{
   		{
   			return(<button type="button"  onClick={this.delete.bind(this)}>x</button>);
   		}
+  		else if(this.props.actionButtons)
+  		{
+  			return(<button type="button"  onClick={this.toggleModal.bind(this)}>detail</button>);
+  		}
   		else
   		{
   			return(<button type="button"  onClick={this.info.bind(this)}>info</button>);
@@ -107,6 +124,7 @@ export default class Trade extends Component{
 		return( 
 			<div>
 				<Modal
+					responded={this.props.trade.responded}
 					footer={this.props.actionButtons}
 					children={this.props.trade.target_id}
 				    showModal={this.state.showModal}
@@ -118,6 +136,8 @@ export default class Trade extends Component{
 				    counterofferLabel="Counteroffer"
 				    onCounteroffer={this.showDialogMakeOfer.bind(this)}
 				    onClose={this.toggleModal.bind(this)}
+				    contactLabel="Contact"
+				    onContact={this.showContact.bind(this)}
 	  				> 	
 	  			</Modal>	
 

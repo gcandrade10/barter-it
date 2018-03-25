@@ -1,0 +1,15 @@
+.accepted { 
+    background-color: #CCE5CC !important;
+    border-color: #CCE5CC !important
+}
+
+.pending { 
+    background-color: #ffffcc !important;
+    border-color: #ffffcc !important
+}
+
+.rejected { 
+    background-color: #ffb2b2 !important;
+    border-color: #ffb2b2 !important
+}
+
