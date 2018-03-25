@@ -4,8 +4,6 @@ import React, { Component } from "react";
 import queryString from 'query-string';
 import TradeList from './TradeList.js';
 /*
-
-
 import 'bootstrap/dist/css/bootstrap-theme.css';
 */
 import 'bootstrap';
@@ -29,10 +27,12 @@ class Trades extends Component
           <TradeList
           	name="Offers"
           	list={this.props.offers}
+            actionButtons={true}
           />
           <TradeList
           	name="Trades"
           	list={this.props.trades}
+            actionButtons={false}
           />
         </div>
       </div>
