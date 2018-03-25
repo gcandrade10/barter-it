@@ -36,7 +36,7 @@ export default class Trade extends Component{
 
   	delete()
   	{
-  		alert("delete");
+  		Meteor.call('trades.remove', this.props.trade._id);
   	}
 
   	info()

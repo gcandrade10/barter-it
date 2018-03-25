@@ -40,5 +40,9 @@ Meteor.methods({
  
     TradesDB.update(tradeId, { $set: { state: state } });
     TradesDB.update(tradeId, { $set: { responded: true } });
+  },
+  'trades.remove'(tradeId){
+    check(tradeId,String);
+    TradesDB.remove(tradeId);
   }
 });
