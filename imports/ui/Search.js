@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import queryString from 'query-string';
+import { ProductsDB } from '../api/products.js';
+import ProductsList from './ProductsList.js';
+import { withTracker } from 'meteor/react-meteor-data';
 class Search extends Component 
 {	
 	someFunction(){
@@ -12,10 +15,17 @@ class Search extends Component
     return (
 		<div>
 	  	<h1>Search</h1>
+      <ProductsList products={this.props.products}/>
+
 
     </div>
     );
   }
 }
 
-export default Search;
+export default withTracker(() => {
+  Meteor.subscribe('Products');
+  return {
+    products: ProductsDB.find({}).fetch(),
+  };
+})(Search);
