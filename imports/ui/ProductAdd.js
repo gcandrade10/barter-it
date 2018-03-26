@@ -25,9 +25,8 @@ export default class Product extends Component {
      	Meteor.call('products.insert', name, description, urlImage);
     }
 
-
-	render() {
-		return(
+    userContent(){
+		return (
 			<div>
 				<form className="new-product" onSubmit={this.handleSubmit.bind(this)} >
 			        <input
@@ -48,6 +47,32 @@ export default class Product extends Component {
 			            <input type="submit" value="Submit" />
       			</form>
 			</div>
+			);
+		
+	}
+
+	unregisteredContent(){
+		return (
+			<div>
+				<h2>Resgister to add a Product!</h2>
+			</div>
+			);
+	}
+
+	render() {
+		let userMessage;
+		if(Meteor.user())
+			{
+				userMessage = this.userContent();
+			}
+			else
+			{
+				userMessage = this.unregisteredContent();
+			}	
+		return(
+			<div>
+				{userMessage}
+				</div>
 		);
 	}
 }
