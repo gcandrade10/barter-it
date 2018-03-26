@@ -28,9 +28,16 @@ export default class Product extends Component {
 
 	render() {
 		let userMessage;
-		if (Meteor.user()._id === this.props.product.owner) {
-			userMessage = this.ownerButtons();
-		} else {
+		if(Meteor.user())
+		{
+			if (Meteor.user()._id === this.props.product.owner) {
+				userMessage = this.ownerButtons();
+			} 
+			else {
+				userMessage = this.otherButtons();
+			}
+		} 
+		else {
 			userMessage = this.otherButtons();
 		}
 		return(
