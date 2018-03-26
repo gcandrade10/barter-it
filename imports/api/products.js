@@ -52,7 +52,7 @@ Meteor.methods({
   },
 
   'products.sell'(productId) {
-    const product = Product.findOne(productId);
+    const product = ProductsDB.findOne(productId);
     ProductsDB.update(productId, { $set: { active: false } });
   }
    

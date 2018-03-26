@@ -40,6 +40,6 @@ class Search extends Component
 export default withTracker(() => {
   Meteor.subscribe('Products');
   return {
-    products: ProductsDB.find({}).fetch(),
+    products: ProductsDB.find({active: true}).fetch(),
   };
 })(Search);
