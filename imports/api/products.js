@@ -49,6 +49,11 @@ Meteor.methods({
     return ProductsDB.find({
       owner:this.userId,
     });
+  },
+
+  'products.sell'(productId) {
+    const product = Product.findOne(productId);
+    ProductsDB.update(productId, { $set: { active: false } });
   }
    
 });
