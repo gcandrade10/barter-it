@@ -8,13 +8,27 @@ class Search extends Component
 	someFunction(){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
-    }
+  }
+
+  handleSubmit(event){
+    event.preventDefault();
+  }
 
   render() {
   	this.someFunction();
     return (
-		<div>
-	  	<h1>Search</h1>
+		<div >
+      <div className="container-fluid">
+  	  	<h1 >Search</h1>
+        <div className="input-group">      
+          <input type="text" className="form-control" placeholder="Search for..."/>
+          <span className="input-group-btn">
+          <button className="btn btn-default" type="button">Search</button>
+          </span>
+        </div>
+        </div>
+
+      <hr/>  
       <ProductsList products={this.props.products}/>
 
 

@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import queryString from 'query-string';
-import Product from './Product.js';
 import ProductsList from './ProductsList.js';
 import { Mongo } from 'meteor/mongo';
 import { withTracker } from 'meteor/react-meteor-data';
 import { ProductsDB } from '../api/products.js';
 import ReactDOM from 'react-dom';
 
-class Products extends Component 
+export default class Products extends Component 
 {	
 	someFunction(){
         let params = queryString.parse(this.props.location.search);
@@ -71,10 +70,3 @@ class Products extends Component
     );
   }
 }
-
-export default withTracker(() => {
-  Meteor.subscribe('Products');
-  return {
-    products: ProductsDB.find({}).fetch(),
-  };
-})(Products);
