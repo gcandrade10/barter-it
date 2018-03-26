@@ -10,6 +10,26 @@ if(Meteor.isServer){
   });
 }
 
+if(Meteor.isServer){
+  Meteor.publish("Search", function(searchValue) {
+    if (!searchValue) {
+      return ProductsDB.find({});
+    }
+    return ProductsDB.find(
+      { $text: {$search: searchValue} },
+        {
+          fields: {
+            name: { $meta: "textScore" },
+            active: true
+          },
+          sort: {
+            name: { $meta: "textScore" }
+          }
+        }
+    );
+  });
+}
+
 Meteor.methods({
 
    'products.insert'(name, description, urlImage) {
@@ -54,6 +74,7 @@ Meteor.methods({
   'products.sell'(productId) {
     const product = ProductsDB.findOne(productId);
     ProductsDB.update(productId, { $set: { active: false } });
-  }
+  },
+
    
 });

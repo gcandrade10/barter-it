@@ -3,6 +3,8 @@ import queryString from 'query-string';
 import { ProductsDB } from '../api/products.js';
 import ProductsList from './ProductsList.js';
 import { withTracker } from 'meteor/react-meteor-data';
+import ReactDOM from 'react-dom';
+
 class Search extends Component 
 {	
 	someFunction(){
@@ -12,6 +14,8 @@ class Search extends Component
 
   handleSubmit(event){
     event.preventDefault();
+    console.log('entro');
+    const searchValue = ReactDOM.findDOMNode(this.refs.searchValue).value.trim();
   }
 
   render() {
@@ -20,11 +24,13 @@ class Search extends Component
 		<div >
       <div className="container-fluid">
   	  	<h1 >Search</h1>
-        <div className="input-group">      
-          <input type="text" className="form-control" placeholder="Search for..."/>
-          <span className="input-group-btn">
-          <button className="btn btn-default" type="button">Search</button>
-          </span>
+        <div className="input-group">   
+          <form onSubmit={this.handleSubmit.bind(this)}> 
+
+            <input id ="searchValue" type="text" className="form-control" placeholder="Search for..."/>
+            <input type="submit" value="Submit" />
+          </form>
+          
         </div>
         </div>
 
@@ -40,6 +46,6 @@ class Search extends Component
 export default withTracker(() => {
   Meteor.subscribe('Products');
   return {
-    products: ProductsDB.find({active: true}).fetch(),
+     products: ProductsDB.find({active: true}).fetch(),
   };
 })(Search);
