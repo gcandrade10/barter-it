@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import queryString from 'query-string';
 import Product from './Product.js';
+import ProductsList from './ProductsList.js';
 import { Mongo } from 'meteor/mongo';
 import { withTracker } from 'meteor/react-meteor-data';
 import { ProductsDB } from '../api/products.js';
@@ -44,11 +45,7 @@ class Products extends Component
     return (
 		<div>
 	  	<h1>Products</h1>
-      <div className="container">
-        <ul>
-          {this.renderProducts()}
-        </ul>
-      </div>
+      <ProductsList products={this.props.products}/>
 
       <form className="new-product" onSubmit={this.handleSubmit.bind(this)} >
         <input
