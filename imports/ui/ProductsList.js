@@ -5,7 +5,7 @@ import { ProductsDB } from '../api/products.js';
 import ReactDOM from 'react-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 
-class ProductsList extends Component {
+export default class ProductsList extends Component {
 	renderProducts() {
 	    return this.props.products.map((product) => (
 	        <Product key={product._id} product = {product} />
@@ -25,9 +25,3 @@ class ProductsList extends Component {
  	};
 }
 
-export default withTracker(() => {
-  Meteor.subscribe('Products');
-  return {
-    products: ProductsDB.find({}).fetch(),
-  };
-})(ProductsList);

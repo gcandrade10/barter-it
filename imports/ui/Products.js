@@ -6,7 +6,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { ProductsDB } from '../api/products.js';
 import ReactDOM from 'react-dom';
 
-export default class Products extends Component 
+class Products extends Component 
 {	
 	someFunction(){
         let params = queryString.parse(this.props.location.search);
@@ -70,3 +70,10 @@ export default class Products extends Component
     );
   }
 }
+
+export default withTracker(() => {
+  Meteor.subscribe('Products');
+  return {
+    products: ProductsDB.find({owner:Meteor.user()._id}).fetch(),
+  };
+})(Products);
