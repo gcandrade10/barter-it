@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { withTracker } from 'meteor/react-meteor-data';
 import { ProductsDB } from '../api/products.js';
 import ModalBarter from './ModalBarter.js';
 // Product component - represents a single product of a user
 
-export default class Product extends Component {
+class Product extends Component {
 
 	constructor(props)
 	{
@@ -90,23 +91,14 @@ export default class Product extends Component {
 				<ModalBarter
 					responded={true}
 					footer={this.props.actionButtons}
-					children=<select>
-							  <option value="volvo">Volvo</option>
-							  <option value="saab">Saab</option>
-							  <option value="mercedes">Mercedes</option>
-							  <option value="audi">Audi</option>
-							</select>
+					sendLabel="Send"
 				    showModal={this.state.showModal}
-				    title="Trade"
-				    dealLabel="Deal"
-				    onDeal={this.toggleModal.bind(this)}
-				    rejectLabel="Reject"
-				    onReject={this.toggleModal.bind(this)}
-				    counterofferLabel="Counteroffer"
-				    onCounteroffer={this.toggleModal.bind(this)}
+				    title={"Barter for "+this.props.product.name}
 				    onClose={this.toggleModal.bind(this)}
-				    contactLabel="Contact"
-				    onContact={this.toggleModal.bind(this)}
+				    onSend={this.toggleModal.bind(this)}
+				    products={this.props.products}
+
+				    
 	  				> 	
 	  			</ModalBarter>	
 
@@ -115,3 +107,16 @@ export default class Product extends Component {
 		);
 	}
 }
+export default withTracker(() => {
+  Meteor.subscribe('Products');
+  if(Meteor.user()){
+    return {
+      products: ProductsDB.find({owner:Meteor.user()._id}).fetch(),
+    };
+  }
+  else {
+      return { 
+        products: [],
+      };
+  }
+})(Product);
