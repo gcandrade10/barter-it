@@ -2,79 +2,46 @@ import { Mongo } from 'meteor/mongo';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
  
-export const ProductsDB = new Mongo.Collection( 'Products');
+export const ProductsDB = new Mongo.Collection( 'Products' );
 
-if(Meteor.isServer){
-  Meteor.publish( 'Products' ,function ProductsPublication(){
-    return ProductsDB.find({});
-  });
+if ( Meteor.isServer ) {
+  ProductsDB._ensureIndex( { name: 1, description: 1, ownerName: 1} );
 }
 
-if(Meteor.isServer){
-  Meteor.publish("Search", function(searchValue) {
-    if (!searchValue) {
-      return ProductsDB.find({});
-    }
-    return ProductsDB.find(
-      { $text: {$search: searchValue} },
-        {
-          fields: {
-            name: { $meta: "textScore" },
-            active: true
-          },
-          sort: {
-            name: { $meta: "textScore" }
-          }
-        }
-    );
-  });
-}
-
-Meteor.methods({
-
-   'products.insert'(name, description, urlImage) {
-    check(name, String);
-    check(description, String);
-    check(urlImage, String);
- 
-    // Make sure the user is logged in before inserting a product
-    if (! this.userId) {
-      throw new Meteor.Error('not-authorized');
-    }
- 
-    ProductsDB.insert({
-      name,
-      description,
-      urlImage,
-      active:true,
-      createdAt: new Date(),
-      owner: this.userId,
-      username: Meteor.users.findOne(this.userId).username,
-    });
-  },
-
-   'products.remove'(productId) {
-    check(productId, String);
-
-    const product = ProductsDB.findOne(productId);
-    //Only owner can delete his comment
-    if(product.owner!==this.userId){
-      throw new Meteor.Error('not-authorized');
-    }
- 
-    ProductsDB.remove(productId);
-  },
-
-  'products.show'() {
-    return ProductsDB.find({
-      owner:this.userId,
-    });
-  },
-
-  'products.sell'(productId) {
-    const product = ProductsDB.findOne(productId);
-    ProductsDB.update(productId, { $set: { active: false } });
-  },
-
-   
+ProductsDB.allow({
+  insert: () => false,
+  update: () => false,
+  remove: () => false
 });
+
+ProductsDB.deny({
+  insert: () => true,
+  update: () => true,
+  remove: () => true
+});
+
+let ProductsSchema = new SimpleSchema({
+  'name': {
+    type: String,
+    label: 'The name of the product'
+  },
+  'description': {
+    type: String,
+    label: 'The description of the product'
+  },
+  'urlImage': {
+    type: String,
+    label: 'url of the image of the product'
+  },
+  'owner': {
+    type: String,
+    label: 'id of the user who created the product'
+  },
+  'ownerName': {
+    type: String,
+    label: 'name of the user who created the product'
+  }
+
+});
+
+ProductsDB.attachSchema( ProductsSchema );

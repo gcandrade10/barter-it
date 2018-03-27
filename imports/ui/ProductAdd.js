@@ -72,7 +72,7 @@ export default class Product extends Component {
 		return(
 			<div>
 				{userMessage}
-				</div>
+			</div>
 		);
 	}
 }
