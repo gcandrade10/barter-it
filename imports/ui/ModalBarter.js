@@ -4,7 +4,7 @@ import "./modalBarter.css";
 
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-
+import CurrencyInput from 'react-currency-input';
 
 export default class ModalBarter extends Component
 {
@@ -13,22 +13,15 @@ export default class ModalBarter extends Component
   {
     super(props);
     this.state={
-      removeSelected: true,
-      disabled: false,
       crazy: false,
+      disabled: false,
       stayOpen: false,
-      value: [],
+      removeSelected: true,
       rtl: false,
+      
 
     };
   }
-
-    handleSelectChange =(value)=> {
-    console.log('You\'ve selected:', value);
-    this.setState({ value });
-  }
-
- 
 
   getOptions()
   {
@@ -56,7 +49,7 @@ export default class ModalBarter extends Component
 
 
 
-    const { crazy, disabled, stayOpen, value } = this.state;
+    const { crazy, disabled, stayOpen} = this.state;
 
     var modalClassName = classNames({
       "modal": true,
@@ -75,17 +68,18 @@ export default class ModalBarter extends Component
                 closeOnSelect={!stayOpen}
                 disabled={disabled}
                 multi
-                onChange={this.handleSelectChange}
+                onChange={this.props.handleSelectChange}
                 placeholder="Select your favourite(s)"
                 removeSelected={this.state.removeSelected}
                 rtl={this.state.rtl}
                 simpleValue
-                value={value}
+                value={this.props.value}
                 //options={options}
                 options={this.getOptions()}
               />
           <h5>Choose your money offer</h5>
-          
+          <CurrencyInput value={this.props.amount} onChangeEvent={this.props.handleChange}/>
+
                         
           </div>
           {this.renderFooter()}

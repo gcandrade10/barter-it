@@ -10,13 +10,24 @@ class Product extends Component {
 	{
 		super(props);
 		this.state={
-			showModal:false
+			showModal:false,
+			value: [],
+      		amount: "1.00"
 		};
 	}
 
 	toggleModal(){
   		this.setState({showModal: !this.state.showModal});
   	}
+
+  	handleSelectChange =(value)=> {
+    console.log('You\'ve selected:', value);
+    this.setState({ value });
+  	}
+
+   handleChange=(event, maskedvalue, floatvalue)=>{
+        this.setState({amount: maskedvalue});
+    }
 
 	deleteThisProduct() {
 		Meteor.call('products.remove',this.props.product._id);
@@ -45,6 +56,10 @@ class Product extends Component {
 
 	noButtons(){
 		return (<button className="delete" onClick={this.signIn.bind(this)}>Barter</button>);
+	}
+
+	send(){
+		alert("value : " +JSON.stringify(this.state.value)+" amount: "+this.state.amount);
 	}
 
 	renderProduct()
@@ -95,10 +110,12 @@ class Product extends Component {
 				    showModal={this.state.showModal}
 				    title={"Barter for "+this.props.product.name}
 				    onClose={this.toggleModal.bind(this)}
-				    onSend={this.toggleModal.bind(this)}
+				    onSend={this.send.bind(this)}
 				    products={this.props.products}
-
-				    
+				    handleChange={this.handleChange}
+				    handleSelectChange={this.handleSelectChange}
+				    amount={this.state.amount}
+				    value={this.state.value}
 	  				> 	
 	  			</ModalBarter>	
 
