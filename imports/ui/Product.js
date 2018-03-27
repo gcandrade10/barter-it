@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
 import { ProductsDB } from '../api/products.js';
-
+import ModalBarter from './ModalBarter.js';
 // Product component - represents a single product of a user
 
 export default class Product extends Component {
+
+	constructor(props)
+	{
+		super(props);
+		this.state={
+			showModal:false
+		};
+	}
+
+	toggleModal(){
+  		this.setState({showModal: !this.state.showModal});
+  	}
 
 	deleteThisProduct() {
 		Meteor.call('products.remove',this.props.product._id);
@@ -11,6 +23,10 @@ export default class Product extends Component {
 
 	sellThisProduct() {
 		Meteor.call('products.sell', this.props.product._id);
+	}
+
+	signIn() {
+		alert("Sign in to barter");
 	}
 
 	ownerButtons(){
@@ -23,10 +39,15 @@ export default class Product extends Component {
 		
 	}
 	otherButtons(){
-		return (<button className="delete" onClick={this.sellThisProduct.bind(this)}>Buy</button>);
+		return (<button className="delete" onClick={this.toggleModal.bind(this)}>Barter</button>);
 	}
 
-	render() {
+	noButtons(){
+		return (<button className="delete" onClick={this.signIn.bind(this)}>Barter</button>);
+	}
+
+	renderProduct()
+	{
 		let userMessage;
 		if(Meteor.user())
 		{
@@ -34,15 +55,13 @@ export default class Product extends Component {
 				userMessage = this.ownerButtons();
 			} 
 			else {
-				userMessage = this.otherButtons();
+			userMessage = this.otherButtons();
 			}
 		} 
 		else {
-			userMessage = this.otherButtons();
+				userMessage = this.noButtons();
 		}
-		return(
-			<div>
-				<li>
+				return(<li>
 					<div className="container">
 					<p className="col-sm-4">Name: {this.props.product.name} </p>
 					<p className="col-sm-4">Description: {this.props.product.description}</p>
@@ -51,7 +70,47 @@ export default class Product extends Component {
 					{ userMessage } 
 					<br/><br/>
 					</div>
-				</li>
+				</li>);
+	}
+
+	/*
+							<select>
+							  <option value="volvo">Volvo</option>
+							  <option value="saab">Saab</option>
+							  <option value="mercedes">Mercedes</option>
+							  <option value="audi">Audi</option>
+							</select>
+	*/
+
+	render() {
+		
+		return(
+			<div>
+
+				<ModalBarter
+					responded={true}
+					footer={this.props.actionButtons}
+					children=<select>
+							  <option value="volvo">Volvo</option>
+							  <option value="saab">Saab</option>
+							  <option value="mercedes">Mercedes</option>
+							  <option value="audi">Audi</option>
+							</select>
+				    showModal={this.state.showModal}
+				    title="Trade"
+				    dealLabel="Deal"
+				    onDeal={this.toggleModal.bind(this)}
+				    rejectLabel="Reject"
+				    onReject={this.toggleModal.bind(this)}
+				    counterofferLabel="Counteroffer"
+				    onCounteroffer={this.toggleModal.bind(this)}
+				    onClose={this.toggleModal.bind(this)}
+				    contactLabel="Contact"
+				    onContact={this.toggleModal.bind(this)}
+	  				> 	
+	  			</ModalBarter>	
+
+				{this.renderProduct()}
 			</div>
 		);
 	}
