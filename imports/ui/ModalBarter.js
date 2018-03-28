@@ -63,13 +63,13 @@ export default class ModalBarter extends Component
             <button className="close" onClick={this.props.onClose} aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
           <div className="modal-body justify-content-center">
-          <h5>Choose your offer product(s)</h5>
+          <h5>Product(s) offer</h5>
               <Select
                 closeOnSelect={!stayOpen}
                 disabled={disabled}
                 multi
                 onChange={this.props.handleSelectChange}
-                placeholder="Select your favourite(s)"
+                placeholder="Select the products to barter"
                 removeSelected={this.state.removeSelected}
                 rtl={this.state.rtl}
                 simpleValue
@@ -77,7 +77,7 @@ export default class ModalBarter extends Component
                 //options={options}
                 options={this.getOptions()}
               />
-          <h5>Choose your money offer</h5>
+          <h5>Money offer</h5>
           <CurrencyInput value={this.props.amount} onChangeEvent={this.props.handleChange}/>
 
                         

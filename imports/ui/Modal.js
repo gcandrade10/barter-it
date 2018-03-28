@@ -3,6 +3,19 @@ import classNames from 'classnames';
 import "./modal.css";
 export default class Modal extends Component
 {
+
+  renderProducts=()=>{
+    return this.props.trade.offers_products.map((product)=>{
+      return(
+                <div className="row" key={product}>
+                    <div className="col-3"></div>
+                    <div className="col-4">
+                      {product}
+                    </div>
+                  </div>
+        );
+    });
+  }
   renderFooter(){
     if(this.props.responded)
     {
@@ -35,50 +48,39 @@ export default class Modal extends Component
             <h4 className="modal-title">{this.props.title}</h4>
           </div>
           <div className="modal-body">
-            {this.props.children}
+
                         <div className="container">
               <div className="row">
                 <div className="col-2">
-                  Otro
+                  {this.props.trade.usernameFrom}
                 </div>
               </div>
               <div className="row">
                 <div className="col-1"></div>
                 <div className="col-2">
-                  Quiere:
+                  Wants:
                 </div>
-                <div className="col-2">
-                  target
+                <div className="col-4">
+                  {this.props.trade.target}
                 </div>
               </div>
               <div className="row">
                 <div className="col-1"></div>
                 <div className="col-2">
-                  Ofrece:
+                  Offers
                 </div>
               </div>
               <div className="row">
                 <div className="col-2"></div>
-                Productos:
+                Products:
                 <div className="container">
-                  <div className="row">
-                    <div className="col-3"></div>
-                    <div className="col-2">
-                      Producto1
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-3"></div>
-                    <div className="col-2">
-                      Producto1
-                    </div>
-                  </div>
+                  {this.renderProducts()}
                 </div>
               </div>
               <div className="row">
                 <div className="col-2"></div>
-                <div className="col-2">Dinero:</div>
-                <div className="col-1">$0</div>
+                <div className="col-2">Money:</div>
+                <div className="col-1">${this.props.trade.money}</div>
               </div>
             </div>
           </div>

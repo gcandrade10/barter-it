@@ -13,8 +13,8 @@ class Trades extends Component
 {	
 	someFunction(){
         let params = queryString.parse(this.props.location.search);
-        console.log(params);
-        console.log(this.props.trades);
+        //console.log(params);
+        //console.log(this.props.trades);
     }
 
   render() {
@@ -43,8 +43,8 @@ class Trades extends Component
 export default withTracker(() => {
   Meteor.subscribe('trades');
   return {
-    offers: TradesDB.find({id_from: Meteor.userId()}).fetch(),
-    trades: TradesDB.find({id_to: Meteor.userId()}).fetch(),
+    offers: TradesDB.find({id_to: Meteor.userId()}).fetch(),
+    trades: TradesDB.find({id_from: Meteor.userId()}).fetch(),
   };
 })(Trades);
 

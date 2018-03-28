@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { ProductsDB } from '../api/products.js';
 import ModalBarter from './ModalBarter.js';
+import { TradesDB } from '../api/trades.js';
+import {Meteor} from 'meteor/meteor';
 // Product component - represents a single product of a user
 
 class Product extends Component {
@@ -12,7 +14,7 @@ class Product extends Component {
 		this.state={
 			showModal:false,
 			value: [],
-      		amount: "1.00"
+      		amount: 1.00
 		};
 	}
 
@@ -26,7 +28,7 @@ class Product extends Component {
   	}
 
    handleChange=(event, maskedvalue, floatvalue)=>{
-        this.setState({amount: maskedvalue});
+        this.setState({amount: floatvalue});
     }
 
 	deleteThisProduct() {
@@ -59,7 +61,10 @@ class Product extends Component {
 	}
 
 	send(){
-		alert("value : " +JSON.stringify(this.state.value)+" amount: "+this.state.amount);
+		//alert("value : " +JSON.stringify(this.state.value)+" amount: "+this.state.amount);
+		arrOfertas=this.state.value.split(",");
+		Meteor.call('trades.insert', this.props.product.username,this.props.product.owner,arrOfertas,this.state.amount,this.props.product._id);
+		this.toggleModal();
 	}
 
 	renderProduct()

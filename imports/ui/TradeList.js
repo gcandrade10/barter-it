@@ -16,7 +16,7 @@ export default class TradeList extends Component{
 	}
 	renderList() {
 		let str = JSON.stringify(this.props.list);
-		console.log("list[0] "+str);
+		//console.log("list[0] "+str);
 		return this.props.list.map((trade) => {
 			return (
 	        <Trade
