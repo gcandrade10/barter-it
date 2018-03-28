@@ -76,6 +76,26 @@ ul {
   font-size: 1em;
   border: none;
   position: relative;
+  background-color: rgb(232,67,9,0.7);
+}
+
+.barter-button {
+  float: right;
+  font-weight: bold;
+  background: none;
+  font-size: 1em;
+  border: none;
+  position: relative;
+  background-color: rgb(178,232,0,0.7);
+}
+
+.buy-button{
+  float: right;
+  font-weight: bold;
+  background: none;
+  font-size: 1em;
+  border: none;
+  position: relative;
   background-color: rgb(232,193,9,0.5);
 }
  

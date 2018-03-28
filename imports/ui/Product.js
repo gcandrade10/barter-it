@@ -53,11 +53,11 @@ class Product extends Component {
 		
 	}
 	otherButtons(){
-		return (<button className="delete" onClick={this.toggleModal.bind(this)}>Barter</button>);
+		return (<button className="barter-button" onClick={this.toggleModal.bind(this)}>Barter</button>);
 	}
 
 	noButtons(){
-		return (<button className="delete" onClick={this.signIn.bind(this)}>Barter</button>);
+		return (<button className="barter-button" onClick={this.signIn.bind(this)}>Barter</button>);
 	}
 
 	send(){
