@@ -76,6 +76,7 @@ ul {
   font-size: 1em;
   border: none;
   position: relative;
+  background-color: rgb(232,193,9,0.5);
 }
  
 li {
@@ -131,4 +132,5 @@ header .hide-completed {
 }
 .size-card{
   width: 100%;
+  background-color: rgb(255,161,23,0.9);
 }

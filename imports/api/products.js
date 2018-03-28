@@ -15,15 +15,6 @@ if(Meteor.isServer){
   });
 }
 
-if(Meteor.isServer){
-  Meteor.publish("Search", function SearchPublication(searchValue) {
-    console.log(searchValue)
-    //if (!searchValue) {
-      return ProductsDB.find({});
-    //}
-   // return ProductsDB.find( { 'name' : { '$regex' : searchValue, '$options' : 'i' } } );
-  });
-}
 
 Meteor.methods({
 

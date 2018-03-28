@@ -86,7 +86,7 @@ class Product extends Component {
 					<div className="card size-card">
 						<img className="thumbnail" alt="Image of the product" src={this.props.product.urlImage}/>
 						<div className="card-body">
-							<p className="font-weight-bold">Name: {this.props.product.name} </p>
+							<h5 className="font-weight-bold">{this.props.product.name} </h5>
 							<p>Description: {this.props.product.description}</p>
 							
 							{ userMessage } 
