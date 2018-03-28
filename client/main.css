@@ -123,4 +123,12 @@ header .hide-completed {
   .new-task input {
     padding-bottom: 5px;
   }
+
+}
+.thumbnail {
+    height:200px;
+    width:100%;
+}
+.size-card{
+  width: 100%;
 }

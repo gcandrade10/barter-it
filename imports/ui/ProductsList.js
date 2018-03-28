@@ -8,7 +8,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 export default class ProductsList extends Component {
 	renderProducts() {
 	    return this.props.products.map((product) => (
-	        <Product key={product._id} product = {product} />
+	        <Product key={product._id} product = {product} />	       
 	      ));
  	}
 
@@ -17,9 +17,9 @@ export default class ProductsList extends Component {
  	render() {
 		return (
 		<div className="container">
-	        <ul>
+	        
 	          {this.renderProducts()}
-	        </ul>
+	        
       	</div>
 		);
  	};

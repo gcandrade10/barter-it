@@ -82,26 +82,18 @@ class Product extends Component {
 		else {
 				userMessage = this.noButtons();
 		}
-				return(<li>
-					<div className="container">
-					<p className="col-sm-4">Name: {this.props.product.name} </p>
-					<p className="col-sm-4">Description: {this.props.product.description}</p>
-					<img alt="Image of the product" src="{this.props.product.urlImage}"/>
-					
-					{ userMessage } 
-					<br/><br/>
+				return(
+					<div className="card size-card">
+						<img className="thumbnail" alt="Image of the product" src={this.props.product.urlImage}/>
+						<div className="card-body">
+							<p className="font-weight-bold">Name: {this.props.product.name} </p>
+							<p>Description: {this.props.product.description}</p>
+							
+							{ userMessage } 
+						</div>
 					</div>
-				</li>);
+				);
 	}
-
-	/*
-							<select>
-							  <option value="volvo">Volvo</option>
-							  <option value="saab">Saab</option>
-							  <option value="mercedes">Mercedes</option>
-							  <option value="audi">Audi</option>
-							</select>
-	*/
 
 	render() {
 		
@@ -123,8 +115,9 @@ class Product extends Component {
 				    value={this.state.value}
 	  				> 	
 	  			</ModalBarter>	
-
+				<div className="col-sm-6 col-md-4 col-xl-3">
 				{this.renderProduct()}
+				</div>
 			</div>
 		);
 	}

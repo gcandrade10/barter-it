@@ -5,28 +5,23 @@ import { check } from 'meteor/check';
 export const ProductsDB = new Mongo.Collection( 'Products');
 
 if(Meteor.isServer){
+  ProductsDB._ensureIndex({"name": "text","description":"text"});
+}
+
+
+if(Meteor.isServer){
   Meteor.publish( 'Products' ,function ProductsPublication(){
     return ProductsDB.find({});
   });
 }
 
 if(Meteor.isServer){
-  Meteor.publish("Search", function(searchValue) {
-    if (!searchValue) {
+  Meteor.publish("Search", function SearchPublication(searchValue) {
+    console.log(searchValue)
+    //if (!searchValue) {
       return ProductsDB.find({});
-    }
-    return ProductsDB.find(
-      { $text: {$search: searchValue} },
-        {
-          fields: {
-            name: { $meta: "textScore" },
-            active: true
-          },
-          sort: {
-            name: { $meta: "textScore" }
-          }
-        }
-    );
+    //}
+   // return ProductsDB.find( { 'name' : { '$regex' : searchValue, '$options' : 'i' } } );
   });
 }
 

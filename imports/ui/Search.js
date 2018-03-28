@@ -4,9 +4,14 @@ import { ProductsDB } from '../api/products.js';
 import ProductsList from './ProductsList.js';
 import { withTracker } from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
+import { Session } from 'meteor/session'
 
 class Search extends Component 
 {	
+  
+  componentDidMount(){
+    Session.setDefault('searchValue', '');
+  }
 	someFunction(){
         let params = queryString.parse(this.props.location.search);
         console.log(params);
@@ -14,8 +19,10 @@ class Search extends Component
 
   handleSubmit(event){
     event.preventDefault();
-    console.log('entro');
+    
     const searchValue = ReactDOM.findDOMNode(this.refs.searchValue).value.trim();
+    
+    Session.set('searchValue', searchValue);
   }
 
   render() {
@@ -25,9 +32,9 @@ class Search extends Component
       <div className="container-fluid">
   	  	<h1 >Search</h1>
         <div className="input-group">   
-          <form onSubmit={this.handleSubmit.bind(this)}> 
+          <form onSubmit={this.handleSubmit.bind(this)} onChange={this.handleSubmit.bind(this)}> 
 
-            <input id ="searchValue" type="text" className="form-control" placeholder="Search for..."/>
+            <input ref ="searchValue" type="text" className="form-control" placeholder="Search for..."/>
             <input type="submit" value="Submit" />
           </form>
           
@@ -44,8 +51,12 @@ class Search extends Component
 }
 
 export default withTracker(() => {
-  Meteor.subscribe('Products');
-  return {
-     products: ProductsDB.find({active: true}).fetch(),
-  };
+  Meteor.subscribe('Products'/*,Session.get('searchValue')*/);
+ 
+    if(Session.get('searchValue')!== ""){
+      return {products: ProductsDB.find({active:true,name:Session.get('searchValue')}).fetch()};
+    }
+    else {
+      return {products: ProductsDB.find({active:true}).fetch()};
+    }
 })(Search);
