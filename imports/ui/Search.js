@@ -10,7 +10,7 @@ class Search extends Component
 {	
   
   componentDidMount(){
-    Session.setDefault('searchValue', '');
+    Session.set('searchValue', '');
   }
 	someFunction(){
         let params = queryString.parse(this.props.location.search);
@@ -52,9 +52,17 @@ class Search extends Component
 
 export default withTracker(() => {
   Meteor.subscribe('Products'/*,Session.get('searchValue')*/);
- 
+  console.log( '"'+Session.get('searchValue')+'"');
     if(Session.get('searchValue')!== ""){
-      return {products: ProductsDB.find({active:true,name:Session.get('searchValue')}).fetch()};
+      return {products: ProductsDB.find({
+        $and:[
+          {active:true},
+          {$or:[
+            {name:{ '$regex' : Session.get('searchValue'), '$options' : 'i' }},
+            {description:{ '$regex' : Session.get('searchValue'), '$options' : 'i' }}
+          ]}
+        ]
+      }).fetch()};
     }
     else {
       return {products: ProductsDB.find({active:true}).fetch()};
