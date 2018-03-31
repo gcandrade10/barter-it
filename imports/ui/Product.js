@@ -67,8 +67,7 @@ class Product extends Component {
 		this.toggleModal();
 	}
 
-	renderProduct()
-	{
+	render() {
 		let userMessage;
 		if(Meteor.user())
 		{
@@ -82,43 +81,37 @@ class Product extends Component {
 		else {
 				userMessage = this.noButtons();
 		}
-				return(
-					<div className="card size-card">
-						<img className="thumbnail" alt="Image of the product" src={this.props.product.urlImage}/>
+		
+		return(
+			
+			<div className="col-xs-6 col-sm-4 col-md-3">
+				<div className="card size-card footer-widget">
+					<img className="thumbnail" alt="Image of the product" src={this.props.product.urlImage}/>
 						<div className="card-body">
 							<h5 className="font-weight-bold">{this.props.product.name} </h5>
 							<p>Description: {this.props.product.description}</p>
 							
 							{ userMessage } 
 						</div>
-					</div>
-				);
-	}
 
-	render() {
-		
-		return(
-			<div>
-
-				<ModalBarter
-					responded={true}
-					footer={this.props.actionButtons}
-					sendLabel="Send"
-				    showModal={this.state.showModal}
-				    title={"Barter for "+this.props.product.name}
-				    onClose={this.toggleModal.bind(this)}
-				    onSend={this.send.bind(this)}
-				    products={this.props.products}
-				    handleChange={this.handleChange}
-				    handleSelectChange={this.handleSelectChange}
-				    amount={this.state.amount}
-				    value={this.state.value}
-	  				> 	
-	  			</ModalBarter>	
-				<div className="col-sm-6 col-md-4 col-xl-3">
-				{this.renderProduct()}
+						<ModalBarter
+							responded={true}
+							footer={this.props.actionButtons}
+							sendLabel="Send"
+						    showModal={this.state.showModal}
+						    title={"Barter for "+this.props.product.name}
+						    onClose={this.toggleModal.bind(this)}
+						    onSend={this.send.bind(this)}
+						    products={this.props.products}
+						    handleChange={this.handleChange}
+						    handleSelectChange={this.handleSelectChange}
+						    amount={this.state.amount}
+						    value={this.state.value}
+			  				> 	
+			  			</ModalBarter>	
 				</div>
 			</div>
+			
 		);
 	}
 }

@@ -17,9 +17,9 @@ export default class ProductsList extends Component {
  	render() {
 		return (
 		<div className="container">
-	        
+	        <div className="row equal">
 	          {this.renderProducts()}
-	        
+	        </div>
       	</div>
 		);
  	};

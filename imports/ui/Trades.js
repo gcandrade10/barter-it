@@ -20,7 +20,7 @@ class Trades extends Component
   render() {
   	this.someFunction();
     return (
-      <div className="container">
+      <div className="container container-background">
     	  	<h1>Trades</h1>
         <div className="row">
           

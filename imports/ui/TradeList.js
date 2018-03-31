@@ -9,7 +9,7 @@ export default class TradeList extends Component{
 		return (
 		<div className="col-6">
 			<h2>{this.props.name}</h2>
-			<div className="container">
+			<div className="container-background">
 	    		{this.renderList()}
 			</div>
 	    </div>);

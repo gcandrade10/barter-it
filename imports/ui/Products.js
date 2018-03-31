@@ -22,9 +22,12 @@ class Products extends Component
   render() {
   	this.someFunction();
     return (
-		<div>
+		<div className="container-background container-products">
 	  	<h1>Products</h1>
+      <h3>Here is a list of the products you have put to trade:</h3>
       <ProductsList products={this.props.products}/>
+      <hr/>
+      <h1>Add a Product!</h1>
       <ProductAdd/>
     </div>
 

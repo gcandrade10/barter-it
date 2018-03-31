@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Route, Switch } from 'react-router-dom';
-//import Home from "./Home";
-import App from "./App";
 import Header from "./Header";
 import Search from "./Search";
 import Products from "./Products";
@@ -20,8 +18,7 @@ class AppContainer extends Component {
             <Route exact path='/jugar' component={Home}/>
             */
           }
-            <Route exact path ='/' component={App}/>
-            <Route path='/search' component={Search}/>
+            <Route exact path='/' component={Search}/>
             <Route path='/products' component={Products}/>
             <Route path='/trades' component={Trades}/>
           </Switch>

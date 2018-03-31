@@ -135,15 +135,15 @@ class Trade extends Component{
   		//alert(this.props.trade.state);
   		if(this.props.trade.state==="rejected")
   		{
-  			return(<button type="button"  onClick={this.delete.bind(this)}>x</button>);
+  			return(<button type="button" className="btn btn-danger"  onClick={this.delete.bind(this)}>x</button>);
   		}
   		else if(this.props.actionButtons)
   		{
-  			return(<button type="button"  onClick={this.toggleModal.bind(this)}>detail</button>);
+  			return(<button type="button" className="btn btn-primary"  onClick={this.toggleModal.bind(this)}>detail</button>);
   		}
   		else
   		{
-  			return(<button type="button"  onClick={this.toggleModalContact.bind(this)}>info</button>);
+  			return(<button type="button"  className="btn btn-info" onClick={this.toggleModalContact.bind(this)}>info</button>);
   		}
   	}
 

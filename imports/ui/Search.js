@@ -4,7 +4,9 @@ import { ProductsDB } from '../api/products.js';
 import ProductsList from './ProductsList.js';
 import { withTracker } from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
-import { Session } from 'meteor/session'
+import { Session } from 'meteor/session';
+
+import AccountsUIWrapper from './AccountsUIWrapper.js'
 
 class Search extends Component 
 {	
@@ -29,24 +31,29 @@ class Search extends Component
   render() {
   	this.someFunction();
     return (
-		<div >
-      <div className="container-fluid">
-  	  	<h1 >Search</h1>
-        <div className="input-group">   
-          <form onSubmit={this.handleSubmit.bind(this)} onChange={this.handleSubmit.bind(this)}> 
-
-            <input ref ="searchValue" type="text" className="form-control" placeholder="Search for..."/>
-            <input type="submit" value="Submit" />
-          </form>
-          
+      <div>
+        
+    		<div className="container-green">
+          <AccountsUIWrapper />
         </div>
+        <div className="container-background">
+          <div className="container-fluid container-search">
+
+      	  	<h1>Search</h1>
+            <div className="input-group">   
+              <form 
+                className="search-form"
+                onSubmit={this.handleSubmit.bind(this)} 
+                onChange={this.handleSubmit.bind(this)}> 
+                
+                <input aria-label="Search" ref ="searchValue" type="text" className="form-control" placeholder="Search for..."/>
+              </form>
+            </div>
+            </div>
+          <hr/>  
+          <ProductsList products={this.props.products}/>
         </div>
-
-      <hr/>  
-      <ProductsList products={this.props.products}/>
-
-
-    </div>
+      </div>
     );
   }
 }

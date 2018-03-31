@@ -27,24 +27,39 @@ export default class Product extends Component {
 
     userContent(){
 		return (
-			<div>
+			<div className="container-add-product">
 				<form className="new-product" onSubmit={this.handleSubmit.bind(this)} >
-			        <input
-			          type="text"
-			          ref="name"
-			          placeholder="Name of the product"
-			            />
-			            <input
-			          type="text"
-			          ref="description"
-			          placeholder="Description of the product"
-			            />
+			        <div className="form-group">
+	    				<label for="name">Name: </label>
+				        <input
+				          id="name"
+				          type="text"
+				          ref="name"
+				          aria-describedby="nameProduct"
+				          placeholder="Name of the product"
+				          className="form-control"
+				            />
+			         </div>
+			         <div className="form-group">
+				        <label for="description">Description: </label>
+				        <textarea
+				          id="description"
+				          type="text"
+				          ref="description"
+				          placeholder="Description of the product"
+				          className="form-control"
+				           />
+			         </div>
+			         <div className="form-group">
+			         	<label for="description">Url image: </label>
 			            <input
 			          type="text"
 			          ref="urlImage"
 			          placeholder="Paste the url of your image"
+			          className="form-control"
 			            />
-			            <input type="submit" value="Submit" />
+			          </div>
+			            <input type="submit" value="Submit" className="btn btn-primary" />
       			</form>
 			</div>
 			);

@@ -1,10 +1,26 @@
 /* CSS declarations go here */
+html {
+
+}
+/* Header content */
+header {
+  font-family: 'Fredericka the Great', cursive;
+  background: #F3F5F5;
+  padding: 20px 15px 15px 15px;
+  position: relative;
+}
+
+header .hide-completed {
+  float: right;
+}
+
+/*Body content*/
+
 body {
-  font-family: sans-serif;
-  background-color: #315481;
-  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
+  background-color: #F3F5F5;
   background-attachment: fixed;
  
+  font-family: 'Chelsea Market', cursive !important;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -17,56 +33,92 @@ body {
   font-size: 14px;
 }
  
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  min-height: 100%;
-  background: white;
-}
- 
-header {
-  background: #d2edf4;
-  background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
-  padding: 20px 15px 15px 15px;
-  position: relative;
-}
- 
-#login-buttons {
-  display: block;
-}
- 
 h1 {
-  font-size: 1.5em;
+  font-size: 3em;
   margin: 0;
-  margin-bottom: 10px;
+  margin-bottom: 8%;
   display: inline-block;
   margin-right: 1em;
+  text-align: center;
 }
- 
-form {
-  margin-top: 10px;
-  margin-bottom: -10px;
-  position: relative;
-}
- 
-.new-task input {
-  box-sizing: border-box;
-  padding: 10px 0;
-  background: transparent;
-  border: none;
-  width: 100%;
-  padding-right: 80px;
-  font-size: 1em;
-}
- 
-.new-task input:focus{
-  outline: 0;
-}
- 
-ul {
+
+h2{
+  display: inline-block;
+  font-size: 2em;
   margin: 0;
-  padding: 0;
-  background: white;
+  margin-bottom: 8%;
+  margin-right: 1em;
+  text-align: left;
+}
+
+h3 {
+  font-size: 2em;
+  margin: 0;
+  margin-bottom: 8%;
+  margin-right: 1em;
+  text-align: center;
+}
+input{
+  border-radius: 26px;
+}
+
+.search-form {
+    width: 400px;
+    margin: 0 auto;
+}
+
+li {
+  position: relative;
+  list-style: none;
+  padding: 15px;
+}
+
+.container {
+  max-width: 80%;
+  margin: 0 auto;
+  min-height: 100%;
+  background: #F3F5F5;
+}
+ 
+.navbar {
+  background-color: #058460;
+}
+
+.navbar-title{
+  font-size: 3em;
+}
+
+.container-search {
+  height: 35vh;
+  background:linear-gradient(rgb(243,245,245),rgb(3,140,88));
+  text-align: center;
+  padding-top: 5%;
+}
+
+.container-products {
+  height: 100%;
+  text-align: center;
+}
+
+.container-add-product {
+  height: 100%;
+  text-align: left;
+  margin-bottom: 5%;
+}
+
+.container-add-product > form {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.top-buffer { 
+  margin-top:20px; 
+}
+
+#login-buttons {
+  display: block;
+  font-size: 1.5em;
+  background: #F3F5F5;
 }
  
 .delete {
@@ -98,59 +150,35 @@ ul {
   position: relative;
   background-color: rgb(232,193,9,0.5);
 }
- 
-li {
-  position: relative;
-  list-style: none;
-  padding: 15px;
-  border-bottom: #eee solid 1px;
-}
- 
-li .text {
-  margin-left: 10px;
-}
- 
-li.checked {
-  color: #888;
-}
- 
-li.checked .text {
-  text-decoration: line-through;
-}
- 
-li.private {
-  background: #eee;
-  border-color: #ddd;
-}
- 
-header .hide-completed {
-  float: right;
-}
- 
+
+
 .toggle-private {
   margin-left: 5px;
 }
  
-@media (max-width: 600px) {
-  li {
-    padding: 12px 15px;
-  }
- 
-  .search {
-    width: 150px;
-    clear: both;
-  }
- 
-  .new-task input {
-    padding-bottom: 5px;
-  }
-
-}
 .thumbnail {
     height:200px;
     width:100%;
 }
+
+.row{
+  margin-top: 15%;
+}
 .size-card{
   width: 100%;
-  background-color: rgb(255,161,23,0.9);
+  background-color: white;
 }
+.container-background{
+  background-color: #F3F5F5;
+}
+
+.container-green{
+  background-color: #038C58;
+}
+
+.footer-widget {
+    border: 1px solid #444;
+    height: 100%;
+    width: 100%;
+}
+
