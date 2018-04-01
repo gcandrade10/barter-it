@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { ProductsDB } from '../api/products.js';
 import ModalBarter from './ModalBarter.js';
+import ModalNumber from './ModalNumber.js';
 import { TradesDB } from '../api/trades.js';
 import {Meteor} from 'meteor/meteor';
 // Product component - represents a single product of a user
@@ -12,14 +13,26 @@ class Product extends Component {
 	{
 		super(props);
 		this.state={
+			showModalNumber:false,
 			showModal:false,
 			value: [],
       		amount: 1.00
 		};
 	}
 
+	toggleModalNumber(){
+  		this.setState({showModalNumber: !this.state.showModalNumber});
+  	}
+
 	toggleModal(){
+  		if(Meteor.user().profile.phone==='5555555')
+  		{
+  			this.setState({showModalNumber: !this.state.showModalNumber});
+  		}
+  		else{
   		this.setState({showModal: !this.state.showModal});
+  			
+  		}	
   	}
 
   	handleSelectChange =(value)=> {
@@ -109,6 +122,18 @@ class Product extends Component {
 						    value={this.state.value}
 			  				> 	
 			  			</ModalBarter>	
+
+			  			<ModalNumber
+							responded={true}
+							footer={true}
+							sendLabel="Send"
+						    showModal={this.state.showModalNumber}
+						    title={"Change number"}
+						    onClose={this.toggleModalNumber.bind(this)}
+						    onSend={this.send.bind(this)}
+			  				> 	
+			  			</ModalNumber>	
+
 				</div>
 			</div>
 			
