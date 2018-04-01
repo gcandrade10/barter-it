@@ -10,6 +10,9 @@ if(Meteor.isServer){
   Meteor.publish('trades',function tradesPublication(){
     return TradesDB.find({});
   });
+  Meteor.publish('users',function usersPublication(){
+    return Meteor.users.find({});
+  });
 }
 
 Meteor.methods({

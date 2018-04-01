@@ -130,7 +130,7 @@ class Product extends Component {
 						    showModal={this.state.showModalNumber}
 						    title={"Change number"}
 						    onClose={this.toggleModalNumber.bind(this)}
-						    onSend={this.send.bind(this)}
+						    onSend={this.toggleModalNumber.bind(this)}
 			  				> 	
 			  			</ModalNumber>	
 

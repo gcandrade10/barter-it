@@ -147,6 +147,23 @@ class Trade extends Component{
   		}
   	}
 
+  	getData = ()=>{
+  		console.log("props "+JSON.stringify(this.props.trade.id_to));
+  		console.log("consulta "+JSON.stringify(Meteor.users.findOne({ _id: this.props.trade.id_to })));
+  		let phone = Meteor.users.findOne({ _id: this.props.trade.id_from })||Meteor.user();
+  		let user =phone.profile.phone;
+  		if(user)
+  		{
+  			return {
+  			username:phone.username,
+  			phone:phone.profile.phone
+  			}
+  		}
+  		else{
+  			return "";
+  		}
+  	}
+
 	render(){
 		return( 
 			<div>
@@ -165,16 +182,20 @@ class Trade extends Component{
 				    onCounteroffer={this.toggleModalBarter.bind(this)}
 				    onClose={this.toggleModal.bind(this)}
 				    contactLabel="Contact"
-				    onContact={this.showContact.bind(this)}
+				    onContact={this.toggleModalContact.bind(this)}
 	  				> 	
 	  			</Modal>	
-
+	  			{console.log(this.props.trade.id_from)}
 	  			<ModalContact
 	  				key={this.props.trade._id}
 	  				showModal={this.state.showModalContact}
 	  				onClose={this.toggleModalContact.bind(this)}
-	  				name={"German"}
-	  				phone={"5559898"}
+	  				//name={this.props.trade.usernameFrom}
+	  				name={this.getData().username}
+	  				phone={
+	  					this.getData().phone
+	  					
+	  				}
 	  			>
 	  			</ModalContact>
 
@@ -207,6 +228,7 @@ class Trade extends Component{
 export default withTracker((props) => {
 	console.log("user From "+props.trade.id_from);
   Meteor.subscribe('Products');
+  Meteor.subscribe('users');
   if(Meteor.user()){
     return {
       products: ProductsDB.find({owner:props.trade.id_from}).fetch(),

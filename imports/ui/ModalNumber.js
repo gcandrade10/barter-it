@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import classNames from 'classnames';
 import "./modalNumber.css";
 import ReactPhoneInput  from 'react-phone-input-2'
+import {Meteor} from 'meteor/meteor';
 export default class ModalNumber extends Component
 {
 
@@ -22,6 +23,7 @@ export default class ModalNumber extends Component
   }
 
   handleOnChange=(value) =>{
+    Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.phone": value}});
    this.setState({
       phone: value
    });
@@ -40,7 +42,7 @@ export default class ModalNumber extends Component
             <button className="close" onClick={this.props.onClose} aria-label="Close"><span aria-hidden="true">&times;</span></button>
           </div>
           <div className="modal-body justify-content-center">
-          <h5>Product(s) offer</h5>
+          <h5>Number</h5>
 
             <ReactPhoneInput defaultCountry={'co'} onChange={this.handleOnChange}/>
 

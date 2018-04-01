@@ -3,6 +3,8 @@ import { TradesDB } from '../api/trades.js';
 import React, { Component } from "react";
 import queryString from 'query-string';
 import TradeList from './TradeList.js';
+import ModalNumber from './ModalNumber.js';
+
 /*
 import 'bootstrap/dist/css/bootstrap-theme.css';
 */
@@ -11,6 +13,18 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 class Trades extends Component 
 {	
+  constructor(props)
+  {
+    super(props);
+    this.state={
+      showModalNumber:false,
+    };
+  }
+
+  toggleModalNumber=()=>{
+      this.setState({showModalNumber: !this.state.showModalNumber});
+    }
+
 	someFunction(){
         let params = queryString.parse(this.props.location.search);
         //console.log(params);
@@ -21,7 +35,20 @@ class Trades extends Component
   	this.someFunction();
     return (
       <div className="container container-background">
+
+              <ModalNumber
+              responded={true}
+              footer={true}
+              sendLabel="Send"
+                showModal={this.state.showModalNumber}
+                title={"Change number"}
+                onClose={this.toggleModalNumber.bind(this)}
+                onSend={this.toggleModalNumber.bind(this)}
+                >   
+              </ModalNumber>
+
     	  	<h1>Trades</h1>
+          <button  onClick={this.toggleModalNumber}>Change number</button>
         <div className="row">
           
           <TradeList
