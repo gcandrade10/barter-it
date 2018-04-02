@@ -16,7 +16,7 @@ export default class ProductsList extends Component {
 
  	render() {
 		return (
-		<div className="container">
+		<div className="container container-products">
 	        <div className="row equal">
 	          {this.renderProducts()}
 	        </div>

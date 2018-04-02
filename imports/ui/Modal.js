@@ -48,12 +48,8 @@ export default class Modal extends Component
             <h4 className="modal-title">{this.props.title}</h4>
           </div>
           <div className="modal-body">
-
-              <div className="container">
                 <div className="row">
-                  <div className="col-2">
-                    <h2>Offerer: {this.props.trade.usernameFrom}</h2>
-                  </div>
+                  <h2>Offerer: {this.props.trade.usernameFrom}</h2>
                 </div>
                 <div className="row">
                   <div className="col-1"></div>
@@ -82,9 +78,11 @@ export default class Modal extends Component
                   <div className="col-2">Money:</div>
                   <div className="col-1">${this.props.trade.money}</div>
                 </div>
-            </div>
+                <div className="row">
+                  {this.renderFooter()}
+                </div>
           </div>
-          {this.renderFooter()}
+          
         </div>
       </div>
     </div>

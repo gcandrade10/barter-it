@@ -39,12 +39,14 @@ class Trade extends Component{
 
   	changeStateAccept()
   	{
+  		alert("You have accepted the deal, you can contact the trader now!")
   		Meteor.call('trades.changeState', this.props.trade._id,"accepted");
   		this.toggleModal().bind(this);
   	}
 
 	changeStateReject()
   	{
+  		alert("You have rejected the offer")
   		Meteor.call('trades.changeState', this.props.trade._id,"rejected");
   		this.toggleModal().bind(this);
   	}
@@ -69,7 +71,7 @@ class Trade extends Component{
     }
 
     send=()=>{
-		alert("value : " +JSON.stringify(this.state.value)+" amount: "+this.state.amount);
+		alert("Your offer has been sent sucessfully");
 		arrOfertas=this.state.value.split(",");
 		//'trades.update'(tradeId,offers_ids,money)
 		Meteor.call('trades.update', this.props.trade._id,arrOfertas,this.state.amount);
@@ -86,29 +88,23 @@ class Trade extends Component{
     });
   		if(this.props.actionButtons)
 		{
-	  					return(<div className="container">
-				            <div className="row">
-				              <div className={stateClassName}>
-				                <div className="row">
-				                  <div className="col-2">
-				                    {this.props.trade.usernameFrom}
-				                  </div>
-				                </div>
-				                <div className="row">
-				                  <div className="col-1"></div>
-				                  <div className="col-2">
-				                    Wants:
-				                  </div>
-				                  <div className="col-4">
-				                    {this.props.trade.target}
-				                  </div>
-				                  <div className="col-2">
-				                    {this.renderDelOrInfo()}
-				                  </div>
-				                </div>
-				              </div>
-				            </div>
-        				</div>);
+	  					return(	<div>
+					              	<div className={stateClassName}>
+						                <div className="row">
+						                  <div className="col-2">
+						                    Wants:
+						                  </div>
+						                  <div className="col-4">
+						                    {this.props.trade.target}
+						                  </div>
+						                  <div className="col-2">
+						                  </div>
+						                  <div className="col-2">
+						                    {this.renderDelOrInfo()}
+						                  </div>
+						                </div>
+					             	</div>
+        						</div>);
 		}
 	  				else
 	  				{
@@ -120,6 +116,8 @@ class Trade extends Component{
 									</div>
 									<div className="col-2">
 										{this.props.trade.state}
+									</div>
+									<div className="col-2">
 									</div>
 									<div className="col-2">
 				                    	{this.renderDelOrInfo()}

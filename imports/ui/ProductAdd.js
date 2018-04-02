@@ -30,7 +30,7 @@ export default class Product extends Component {
 			<div className="container-add-product">
 				<form className="new-product" onSubmit={this.handleSubmit.bind(this)} >
 			        <div className="form-group">
-	    				<label for="name">Name: </label>
+	    				<label htmlFor="name">Name: </label>
 				        <input
 				          id="name"
 				          type="text"
@@ -41,7 +41,7 @@ export default class Product extends Component {
 				            />
 			         </div>
 			         <div className="form-group">
-				        <label for="description">Description: </label>
+				        <label htmlFor="description">Description: </label>
 				        <textarea
 				          id="description"
 				          type="text"
@@ -51,7 +51,7 @@ export default class Product extends Component {
 				           />
 			         </div>
 			         <div className="form-group">
-			         	<label for="description">Url image: </label>
+			         	<label htmlFor="description">Url image: </label>
 			            <input
 			          type="text"
 			          ref="urlImage"

@@ -48,7 +48,7 @@ class Trades extends Component
               </ModalNumber>
 
     	  	<h1>Trades</h1>
-          <button  onClick={this.toggleModalNumber}>Change number</button>
+          <button className="btn btn-primary" onClick={this.toggleModalNumber}>Change number</button>
         <div className="row">
           
           <TradeList
@@ -62,6 +62,7 @@ class Trades extends Component
             actionButtons={false}
           />
         </div>
+        <br/>
       </div>
     );
   }

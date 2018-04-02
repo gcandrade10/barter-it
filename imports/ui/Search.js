@@ -40,18 +40,22 @@ class Search extends Component
           <div className="container-fluid container-search">
 
       	  	<h1>Search</h1>
-            <div className="input-group">   
+            <h4>Type to search:</h4>
+            <div className="input-group search-div">   
               <form 
-                className="search-form"
+                className="search-form search-bar"
                 onSubmit={this.handleSubmit.bind(this)} 
                 onChange={this.handleSubmit.bind(this)}> 
                 
                 <input aria-label="Search" ref ="searchValue" type="text" className="form-control" placeholder="Search for..."/>
               </form>
             </div>
+            <h5>Remember, to barter, you should offer a product</h5>
+            <h5>Go <a href="/#/products">here</a> to add a product</h5>
             </div>
-          <hr/>  
           <ProductsList products={this.props.products}/>
+
+          <h6>Eeny, meeny, miny, moe. With which Product should I go?</h6>
         </div>
       </div>
     );

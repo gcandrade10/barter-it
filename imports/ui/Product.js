@@ -60,21 +60,21 @@ class Product extends Component {
 		return (
 			<div>
 				<p>{this.props.product.active ? 'Active' : 'Sold' } </p>
-				<button className="delete" onClick={this.deleteThisProduct.bind(this)}>Delete</button>
+				<button className="btn btn-danger" onClick={this.deleteThisProduct.bind(this)}>Delete</button>
 			</div>
 			);
 		
 	}
 	otherButtons(){
-		return (<button className="barter-button" onClick={this.toggleModal.bind(this)}>Barter</button>);
+		return (<button className="btn btn-success" onClick={this.toggleModal.bind(this)}>Barter</button>);
 	}
 
 	noButtons(){
-		return (<button className="barter-button" onClick={this.signIn.bind(this)}>Barter</button>);
+		return (<button className="btn btn-warning" onClick={this.signIn.bind(this)}>Barter</button>);
 	}
 
 	send(){
-		//alert("value : " +JSON.stringify(this.state.value)+" amount: "+this.state.amount);
+		alert("Your offer has been sent sucessfully");
 		arrOfertas=this.state.value.split(",");
 		Meteor.call('trades.insert', this.props.product.username,this.props.product.owner,arrOfertas,this.state.amount,this.props.product._id);
 		this.toggleModal();
@@ -97,7 +97,7 @@ class Product extends Component {
 		
 		return(
 			
-			<div className="col-xs-6 col-sm-4 col-md-3">
+			<div className="col-xs-6 col-sm-6 col-md-4 col-lg-3">
 				<div className="card size-card footer-widget">
 					<img className="thumbnail" alt="Image of the product" src={this.props.product.urlImage}/>
 						<div className="card-body">

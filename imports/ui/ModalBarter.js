@@ -40,7 +40,7 @@ export default class ModalBarter extends Component
     
       return(
               <div className="modal-footer">
-                <button  onClick={this.props.onSend}>{this.props.sendLabel}</button>
+                <button className="btn btn-success" onClick={this.props.onSend}>{this.props.sendLabel}</button>
               </div>
         );
   }

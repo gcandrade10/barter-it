@@ -17,12 +17,13 @@ export default class ModalNumber extends Component
   renderFooter(){ 
       return(
               <div className="modal-footer">
-                <button  onClick={this.props.onSend}>{this.props.sendLabel}</button>
+                <button className="btn btn-primary" onClick={this.props.onSend}>Update number</button>
               </div>
         );
   }
 
   handleOnChange=(value) =>{
+
     Meteor.users.update({_id: Meteor.userId()}, {$set: {"profile.phone": value}});
    this.setState({
       phone: value
