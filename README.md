@@ -10,3 +10,12 @@ just made it another secondary product more.
 
 This web application is developed in MeteorJS, with React for the front-end.
 
+##Install
+
+We offer this application as a open-source software, so we incourage anyone
+reading this to install it, play with it and make awesome stuff with it!
+
+#Requirements
+To install this repository on your local machine you should have:
+* MeteorJS installed
+  * install meteor  [Meteor](https://www.meteor.com/install)
