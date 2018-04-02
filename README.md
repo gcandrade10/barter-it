@@ -10,19 +10,19 @@ just made it another secondary product more.
 
 This web application is developed in MeteorJS, with React for the front-end.
 
-##Install
+## Install
 
 We offer this application as a open-source software, so we incourage anyone
 reading this to install it, play with it and make awesome stuff with it!
 
-#Requirements
+# Requirements
 To install this repository on your local machine you should have:
 * MeteorJS installed
   * Install meteor if you don't have it [here](https://www.meteor.com/install)
 * Some text editor (optional - to play with the code)
   * [Sublime text](https://www.sublimetext.com/3) it's a good option
 
-#Procedure
+# Procedure
 Follow these steps:
 
 1. Download the source code to your computer
