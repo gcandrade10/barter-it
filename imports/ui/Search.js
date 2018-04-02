@@ -17,7 +17,7 @@ class Search extends Component
   }
 	someFunction(){
         let params = queryString.parse(this.props.location.search);
-        console.log(params);
+        //console.log(params);
   }
 
   handleSubmit(event){
@@ -64,7 +64,7 @@ class Search extends Component
 
 export default withTracker(() => {
   Meteor.subscribe('Products');
-  console.log( '"'+Session.get('searchValue')+'"');
+  //console.log( '"'+Session.get('searchValue')+'"');
     if(Session.get('searchValue')!== ''){
       return {products: ProductsDB.find({
         $and:[

@@ -10,7 +10,7 @@ class Products extends Component
 {	
 	someFunction(){
         let params = queryString.parse(this.props.location.search);
-        console.log(params);
+        //console.log(params);
     }
 
   renderProducts() {

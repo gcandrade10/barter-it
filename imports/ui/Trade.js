@@ -23,13 +23,13 @@ class Trade extends Component{
 	}
 	toggleModal(){
   		this.setState({showModal: !this.state.showModal});
-  		console.log("PRODUCTS");
-		console.log(JSON.stringify(this.props.products));
+  		//console.log("PRODUCTS");
+		//console.log(JSON.stringify(this.props.products));
   	}
 
   	toggleModalBarter=()=>{
   		this.setState({showModalBarter: !this.state.showModalBarter});
-  		console.log(JSON.stringify(this.state.products));
+  		//console.log(JSON.stringify(this.state.products));
   		this.setState({showModal: !this.state.showModal});
   	}
 
@@ -62,7 +62,7 @@ class Trade extends Component{
   	}
 
   	handleSelectChange =(value)=> {
-    console.log('You\'ve selected:', value);
+    //console.log('You\'ve selected:', value);
     this.setState({ value });
   	}
 
@@ -88,23 +88,29 @@ class Trade extends Component{
     });
   		if(this.props.actionButtons)
 		{
-	  					return(	<div>
-					              	<div className={stateClassName}>
-						                <div className="row">
-						                  <div className="col-2">
-						                    Wants:
-						                  </div>
-						                  <div className="col-4">
-						                    {this.props.trade.target}
-						                  </div>
-						                  <div className="col-2">
-						                  </div>
-						                  <div className="col-2">
-						                    {this.renderDelOrInfo()}
-						                  </div>
-						                </div>
-					             	</div>
-        						</div>);
+	  					return(<div className="container">
+				            <div className="row">
+				              <div className={stateClassName}>
+				                <div className="row">
+				                  <div className="col-2">
+				                    {this.props.trade.usernameFrom}
+				                  </div>
+				                </div>
+				                <div className="row">
+				                  <div className="col-1"></div>
+				                  <div className="col-2">
+				                    Wants:
+				                  </div>
+				                  <div className="col-4">
+				                    {this.props.trade.target}
+				                  </div>
+				                  <div className="col-2">
+				                    {this.renderDelOrInfo()}
+				                  </div>
+				                </div>
+				              </div>
+				            </div>
+        				</div>);
 		}
 	  				else
 	  				{
@@ -146,8 +152,8 @@ class Trade extends Component{
   	}
 
   	getData = ()=>{
-  		console.log("props "+JSON.stringify(this.props.trade.id_to));
-  		console.log("consulta "+JSON.stringify(Meteor.users.findOne({ _id: this.props.trade.id_to })));
+  		//console.log("props "+JSON.stringify(this.props.trade.id_to));
+  		//console.log("consulta "+JSON.stringify(Meteor.users.findOne({ _id: this.props.trade.id_to })));
   		let phone = Meteor.users.findOne({ _id: this.props.trade.id_from })||Meteor.user();
   		let user =phone.profile.phone;
   		if(user)
@@ -183,7 +189,8 @@ class Trade extends Component{
 				    onContact={this.toggleModalContact.bind(this)}
 	  				> 	
 	  			</Modal>	
-	  			{console.log(this.props.trade.id_from)}
+	  			{//console.log(this.props.trade.id_from)
+	  			}
 	  			<ModalContact
 	  				key={this.props.trade._id}
 	  				showModal={this.state.showModalContact}
@@ -224,7 +231,7 @@ class Trade extends Component{
 	}
 }
 export default withTracker((props) => {
-	console.log("user From "+props.trade.id_from);
+	//console.log("user From "+props.trade.id_from);
   Meteor.subscribe('Products');
   Meteor.subscribe('users');
   if(Meteor.user()){
