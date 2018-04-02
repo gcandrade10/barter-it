@@ -18,4 +18,21 @@ reading this to install it, play with it and make awesome stuff with it!
 #Requirements
 To install this repository on your local machine you should have:
 * MeteorJS installed
-  * install meteor  [Meteor](https://www.meteor.com/install)
+  * Install meteor if you don't have it [here](https://www.meteor.com/install)
+* Some text editor (optional - to play with the code)
+  * [Sublime text](https://www.sublimetext.com/3) it's a good option
+
+#Procedure
+Follow these steps:
+
+1. Download the source code to your computer
+2. Unzip it if you download it and didn't clone it
+3. Open your folder and go inside
+4. Shift + right click and select "Open command line here" or "Open PowerShell here"
+5. Type in "meteor"
+6. Go to your preferred browser and type "localhost:3000"
+7. Voilà!!!!!
+
+
+
+Wunderschön oder? 
