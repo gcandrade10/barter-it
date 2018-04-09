@@ -20,3 +20,5 @@ react-meteor-data
 accounts-ui
 accounts-password
 meteorhacks:inject-initial
+accounts-google
+google-config-ui

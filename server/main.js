@@ -18,3 +18,6 @@ Accounts.onCreateUser(function (options, user) {
   user.profile['phone'] = '5555555';
   return user;
 });
+Accounts.config({
+    forbidClientAccountCreation: true
+});
