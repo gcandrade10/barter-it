@@ -11,7 +11,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 class Trade extends Component{
 	constructor(props)
 	{
-		
+		console.log(JSON.stringify(props.fromUser));
 		super(props);
 		this.state={
 			showModal:false,
@@ -35,6 +35,7 @@ class Trade extends Component{
 
 	toggleModalContact(){
   		this.setState({showModalContact: !this.state.showModalContact});
+  		this.setState({showModal: false});
   	}
 
   	changeStateAccept()
@@ -154,13 +155,22 @@ class Trade extends Component{
   	getData = ()=>{
   		//console.log("props "+JSON.stringify(this.props.trade.id_to));
   		//console.log("consulta "+JSON.stringify(Meteor.users.findOne({ _id: this.props.trade.id_to })));
-  		let phone = Meteor.users.findOne({ _id: this.props.trade.id_from })||Meteor.user();
-  		let user =phone.profile.phone;
+
+  		let fromUser=Meteor.users.findOne({ _id: this.props.trade.id_from });
+  		//console.log(JSON.stringify(fromUser));
+
+  		let toUser=Meteor.users.findOne({ _id: this.props.trade.id_to });
+		//console.log(JSON.stringify(toUser));
+
+  		let bool = this.props.trade.id_from!==Meteor.user()._id;
+  		let phone = bool ? fromUser : toUser; 
+
+  		let user =phone.profile;
   		if(user)
   		{
   			return {
-  			username:phone.username,
-  			phone:phone.profile.phone
+  			name:user.name,
+  			phone:user.phone
   			}
   		}
   		else{
@@ -169,74 +179,95 @@ class Trade extends Component{
   	}
 
 	render(){
-		return( 
-			<div>
-				<Modal
-					key={this.props.trade._id+"Modal"}
-					responded={this.props.trade.responded}
-					footer={this.props.actionButtons}
-					trade={this.props.trade}
-				    showModal={this.state.showModal}
-				    title="Trade"
-				    dealLabel="Deal"
-				    onDeal={this.changeStateAccept.bind(this)}
-				    rejectLabel="Reject"
-				    onReject={this.changeStateReject.bind(this)}
-				    counterofferLabel="Counteroffer"
-				    onCounteroffer={this.toggleModalBarter.bind(this)}
-				    onClose={this.toggleModal.bind(this)}
-				    contactLabel="Contact"
-				    onContact={this.toggleModalContact.bind(this)}
-	  				> 	
-	  			</Modal>	
-	  			{//console.log(this.props.trade.id_from)
-	  			}
-	  			<ModalContact
-	  				key={this.props.trade._id}
-	  				showModal={this.state.showModalContact}
-	  				onClose={this.toggleModalContact.bind(this)}
-	  				//name={this.props.trade.usernameFrom}
-	  				name={this.getData().username}
-	  				phone={
-	  					this.getData().phone
-	  					
-	  				}
-	  			>
-	  			</ModalContact>
-
-	  			<ModalBarter
-					responded={true}
-					footer={this.props.actionButtons}
-					sendLabel="Send"
-				    showModal={this.state.showModalBarter}
-				    title={"Counteroffer for "+this.props.trade.target}
-				    onClose={this.toggleModalBarter.bind(this)}
-				    onSend={this.send.bind(this)}
-				    products={this.props.products}
-				    handleChange={this.handleChange}
-				    handleSelectChange={this.handleSelectChange}
-				    amount={this.state.amount}
-				    value={this.state.value}
-	  				> 	
-	  			</ModalBarter>
+		const { loading } = this.props;
+        if (loading) {
+            return (
+                <h2>Loading Page ...</h2>
+            );
+        }
+        else
+        {
 
 
+			return( 
+				<div>
+					<Modal
+						key={this.props.trade._id+"Modal"}
+						responded={this.props.trade.responded}
+						footer={this.props.actionButtons}
+						trade={this.props.trade}
+					    showModal={this.state.showModal}
+					    title="Trade"
+					    dealLabel="Deal"
+					    onDeal={this.changeStateAccept.bind(this)}
+					    rejectLabel="Reject"
+					    onReject={this.changeStateReject.bind(this)}
+					    counterofferLabel="Counteroffer"
+					    onCounteroffer={this.toggleModalBarter.bind(this)}
+					    onClose={this.toggleModal.bind(this)}
+					    contactLabel="Contact"
+					    onContact={this.toggleModalContact.bind(this)}
+		  				> 	
+		  			</Modal>	
+		  			{//console.log(this.props.trade.id_from)
+		  			}
+		  			<ModalContact
+		  				key={this.props.trade._id}
+		  				showModal={this.state.showModalContact}
+		  				onClose={this.toggleModalContact.bind(this)}
+		  				//name={this.props.trade.usernameFrom}
+		  				name={this.getData().name}
+		  				phone={
+		  					this.getData().phone
+		  					
+		  				}
+		  			>
+		  			</ModalContact>
 
-	  			{
-	  			this.renderTrade()	
-	  			}
+		  			<ModalBarter
+						responded={true}
+						footer={this.props.actionButtons}
+						sendLabel="Send"
+					    showModal={this.state.showModalBarter}
+					    title={"Counteroffer for "+this.props.trade.target}
+					    onClose={this.toggleModalBarter.bind(this)}
+					    onSend={this.send.bind(this)}
+					    products={this.props.products}
+					    handleChange={this.handleChange}
+					    handleSelectChange={this.handleSelectChange}
+					    amount={this.state.amount}
+					    value={this.state.value}
+		  				> 	
+		  			</ModalBarter>
 
-			</div>
+
+
+		  			{
+		  			this.renderTrade()	
+		  			}
+
+				</div>
 			);
+		}
 	}
 }
 export default withTracker((props) => {
 	//console.log("user From "+props.trade.id_from);
   Meteor.subscribe('Products');
-  Meteor.subscribe('users');
+  const usersLoad= Meteor.subscribe('users',{
+  onReady: function () 
+  	{ 
+  		console.log("success");
+  		console.log(Meteor.users.find({}).count());
+
+  		
+  	},
+  	onError: function () { console.log("onError", arguments); }
+  });
   if(Meteor.user()){
     return {
       products: ProductsDB.find({owner:props.trade.id_from}).fetch(),
+      loading:!usersLoad.ready(),
     };
   }
   else {

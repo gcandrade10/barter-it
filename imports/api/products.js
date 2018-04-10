@@ -13,6 +13,9 @@ if(Meteor.isServer){
   Meteor.publish( 'Products' ,function ProductsPublication(){
     return ProductsDB.find({});
   });
+    Meteor.publish('allUsers',function usersPublication(){
+    return Meteor.users.find({});
+  });
 }
 
 
