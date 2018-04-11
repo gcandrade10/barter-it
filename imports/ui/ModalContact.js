@@ -18,6 +18,7 @@ export default class ModalContact extends Component
           </div>
           <div className="modal-body justify-content-center">
             <h5>{this.props.name}</h5>
+            <h5>{this.props.email}</h5>
             <h5>{this.props.phone}</h5>
           </div>
         </div>

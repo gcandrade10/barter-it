@@ -166,11 +166,13 @@ class Trade extends Component{
   		let phone = bool ? fromUser : toUser; 
 
   		let user =phone.profile;
+  		let email = phone.services.google.email;
   		if(user)
   		{
   			return {
   			name:user.name,
-  			phone:user.phone
+  			phone:user.phone,
+  			email:email,
   			}
   		}
   		else{
@@ -217,10 +219,8 @@ class Trade extends Component{
 		  				onClose={this.toggleModalContact.bind(this)}
 		  				//name={this.props.trade.usernameFrom}
 		  				name={this.getData().name}
-		  				phone={
-		  					this.getData().phone
-		  					
-		  				}
+		  				phone={this.getData().phone}
+		  				email={this.getData().email}
 		  			>
 		  			</ModalContact>
 
