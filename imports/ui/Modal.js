@@ -16,6 +16,18 @@ export default class Modal extends Component
         );
     });
   }
+  renderTargets=()=>{
+    return this.props.trade.targets.map((product)=>{
+      return(
+                <div className="row" key={product}>
+                    <div className="col-3"></div>
+                    <div className="col-4">
+                      {product}
+                    </div>
+                  </div>
+        );
+    });
+  }
   renderFooter(){
     if(this.props.responded)
     {
@@ -56,8 +68,12 @@ export default class Modal extends Component
                   <div className="col-2">
                     Wants:
                   </div>
-                  <div className="col-4">
-                    {this.props.trade.target}
+                </div>
+                <div className="row">
+                  <div className="col-2"></div>
+                  Products:
+                  <div className="container">
+                    {this.renderTargets()}
                   </div>
                 </div>
                 <div className="row">

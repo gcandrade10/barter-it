@@ -40,9 +40,26 @@ class Trade extends Component{
 
   	changeStateAccept()
   	{
-  		alert("You have accepted the deal, you can contact the trader now!")
   		Meteor.call('trades.changeState', this.props.trade._id,"accepted");
-  		this.toggleModal().bind(this);
+  		arrOffers=this.props.trade.offers_ids;
+  		arrTargets=this.props.trade.targets_ids;
+		
+		let arrayLength = arrOffers.length;
+		for (let i = 0; i < arrayLength; i++) 
+		{
+			Meteor.call('products.sell', arrOffers[i],"accepted");
+		    
+		}
+
+		arrayLength = arrTargets.length;
+		for (let i = 0; i < arrayLength; i++) 
+		{
+			Meteor.call('products.sell', arrTargets[i],"accepted");
+		    
+		}
+
+  		this.toggleModal();
+  		alert("You have accepted the deal, you can contact the trader now!")
   	}
 
 	changeStateReject()
@@ -72,11 +89,11 @@ class Trade extends Component{
     }
 
     send=()=>{
-		alert("Your offer has been sent sucessfully");
 		arrOfertas=this.state.value.split(",");
 		//'trades.update'(tradeId,offers_ids,money)
 		Meteor.call('trades.update', this.props.trade._id,arrOfertas,this.state.amount);
 		this.toggleModalBarter();
+		alert("Your offer has been sent sucessfully");
 	}
 
   	renderTrade()
@@ -142,7 +159,7 @@ class Trade extends Component{
   		{
   			return(<button type="button" className="btn btn-danger"  onClick={this.delete.bind(this)}>x</button>);
   		}
-  		else if(this.props.actionButtons)
+  		else if(this.props.actionButtons || this.props.trade.state==="pending")
   		{
   			return(<button type="button" className="btn btn-primary"  onClick={this.toggleModal.bind(this)}>detail</button>);
   		}

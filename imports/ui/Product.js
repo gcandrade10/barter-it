@@ -76,7 +76,9 @@ class Product extends Component {
 	send(){
 		alert("Your offer has been sent sucessfully");
 		arrOfertas=this.state.value.split(",");
-		Meteor.call('trades.insert', this.props.product.username,this.props.product.owner,arrOfertas,this.state.amount,this.props.product._id);
+		let arrTargets=[];
+		arrTargets.push(this.props.product._id);
+		Meteor.call('trades.insert', this.props.product.username,this.props.product.owner,arrOfertas,this.state.amount,arrTargets);
 		this.toggleModal();
 	}
 
