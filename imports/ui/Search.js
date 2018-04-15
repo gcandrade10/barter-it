@@ -5,8 +5,8 @@ import ProductsList from './ProductsList.js';
 import { withTracker } from 'meteor/react-meteor-data';
 import ReactDOM from 'react-dom';
 import { Session } from 'meteor/session';
-
-import AccountsUIWrapper from './AccountsUIWrapper.js'
+import AccountsUIWrapper from './AccountsUIWrapper.js';
+import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
 
 class Search extends Component 
 {	
@@ -40,7 +40,6 @@ class Search extends Component
           <div className="container-fluid container-search">
 
       	  	<h1>Search</h1>
-            <h4>Type to search:</h4>
             <div className="input-group search-div">   
               <form 
                 className="search-form search-bar"
@@ -60,6 +59,7 @@ class Search extends Component
       </div>
     );
   }
+
 }
 
 export default withTracker(() => {

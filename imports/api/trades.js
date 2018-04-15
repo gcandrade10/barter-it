@@ -15,6 +15,53 @@ if(Meteor.isServer){
   });
 }
 
+if (Meteor.isServer) {
+  DDPRateLimiter.setErrorMessage(({ timeToReset }) => {
+    const time = Math.ceil(timeToReset / 1000)
+    return 'Try again after ' + time + ' seconds.'
+  })
+
+  DDPRateLimiter.addRule({
+    type: 'method',
+    name: 'trades.insert',
+    connectionId () {
+      return true
+    },
+    numRequests: 1,
+    timeInterval: 1000
+  });
+
+  DDPRateLimiter.addRule({
+    type: 'method',
+    name: 'trades.update',
+    connectionId () {
+      return true
+    },
+    numRequests: 1,
+    timeInterval: 1000
+  });
+
+  DDPRateLimiter.addRule({
+    type: 'method',
+    name: 'trades.changeState',
+    connectionId () {
+      return true
+    },
+    numRequests: 1,
+    timeInterval: 1000
+  });
+
+  DDPRateLimiter.addRule({
+    type: 'method',
+    name: 'trades.remove',
+    connectionId () {
+      return true
+    },
+    numRequests: 1,
+    timeInterval: 1000
+  });
+}
+
 Meteor.methods({
   
   'trades.insert'(usernameTo,id_to,offers_ids,money,targets_ids) {

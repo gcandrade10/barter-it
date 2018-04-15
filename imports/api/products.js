@@ -4,6 +4,8 @@ import { check } from 'meteor/check';
  
 export const ProductsDB = new Mongo.Collection( 'Products');
 
+
+
 if(Meteor.isServer){
   ProductsDB._ensureIndex({"name": "text","description":"text"});
 }
@@ -17,6 +19,55 @@ if(Meteor.isServer){
     return Meteor.users.find({});
   });
 }
+
+if (Meteor.isServer) {
+  DDPRateLimiter.setErrorMessage(({ timeToReset }) => {
+    const time = Math.ceil(timeToReset / 1000)
+    return 'Try again after ' + time + ' seconds.'
+  })
+
+  DDPRateLimiter.addRule({
+    type: 'method',
+    name: 'products.insert',
+    connectionId () {
+      return true
+    },
+    numRequests: 5,
+    timeInterval: 1000
+  });
+
+  DDPRateLimiter.addRule({
+    type: 'method',
+    name: 'products.remove',
+    connectionId () {
+      return true
+    },
+    numRequests: 1,
+    timeInterval: 1000
+  });
+
+  DDPRateLimiter.addRule({
+    type: 'method',
+    name: 'products.show',
+    connectionId () {
+      return true
+    },
+    numRequests: 1,
+    timeInterval: 1000
+  });
+
+  DDPRateLimiter.addRule({
+    type: 'method',
+    name: 'products.sell',
+    connectionId () {
+      return true
+    },
+    numRequests: 1,
+    timeInterval: 1000
+  })
+}
+
+
 
 
 Meteor.methods({

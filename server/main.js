@@ -5,6 +5,9 @@ import '../imports/api/tasks.js';
 import '../imports/api/trades.js';
 import '../imports/api/products.js';
 import { Accounts } from 'meteor/accounts-base';
+import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
+
+
 Meteor.startup(() => {
 	//Sacado de https://forums.meteor.com/t/can-i-edit-html-tag-in-meteor/5867/6
 	Inject.rawModHtml("addLanguage", function(html) {

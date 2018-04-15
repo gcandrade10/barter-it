@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { ProductsDB } from '../api/products.js';
 import ReactDOM from 'react-dom';
+import { DDPRateLimiter } from 'meteor/ddp-rate-limiter';
 
 // Product component - represents a single product of a user
 
@@ -87,7 +88,10 @@ export default class Product extends Component {
 		return(
 			<div>
 				{userMessage}
-				</div>
+			</div>
 		);
 	}
+
+
+
 }

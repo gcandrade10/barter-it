@@ -1,10 +1,26 @@
 /* CSS declarations go here */
+
+html, body{
+    font-size: 100%;
+  font-family: 'Open Sans', sans-serif;
+  background:#ffffff;
+}
+
+main {
+  margin-bottom: 0;
+}
+
+h1,h2,h3,h4,h5,h6,a{
+  font-family: 'Raleway', sans-serif;
+  margin:0;
+  font-weight:700;
+}
+
 html {
   height: 100vh;
 }
 /* Header content */
 header {
-  font-family: 'Fredericka the Great', cursive;
   background: #F3F5F5;
   padding: 20px 15px 15px 15px;
   position: relative;
@@ -19,8 +35,7 @@ header .hide-completed {
 body {
   background-color: #F3F5F5;
   background-attachment: fixed;
- 
-  font-family: 'Chelsea Market', cursive !important;
+
   position: absolute;
   top: 0;
   bottom: 0;
@@ -100,7 +115,7 @@ footer {
   height: 10vh;
   text-align: center;
 
-  background:linear-gradient(rgb(3,140,88),rgb(243,245,245));
+  background:linear-gradient(rgb(234,188,15),rgb(243,245,245));
 }
 
 .btn {
@@ -134,10 +149,14 @@ footer {
 
 .container-search {
   height: 60%;
-  background:linear-gradient(rgb(243,245,245),rgb(3,140,88));
+  background:linear-gradient(rgb(243,245,245),rgb(234,188,15));
   text-align: center;
   padding-top: 5%;
   padding-bottom: 5%;
+}
+
+.container-products-list {
+  background:linear-gradient(rgb(243,245,245),rgb(234,188,15));
 }
 
 .container-products {
