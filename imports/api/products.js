@@ -108,7 +108,7 @@ Meteor.methods({
   'products.show'() {
     return ProductsDB.find({
       owner:this.userId,
-    });
+    }).fetch();
   },
 
   'products.sell'(productId) {
