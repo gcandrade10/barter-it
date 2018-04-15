@@ -13,7 +13,7 @@ if (Meteor.isServer) {
             Meteor.user.returns({
                 username: 'fakeUsername'
             });
-            Meteor.userId.returns('12345');
+            Meteor.userId.returns('12345');    
         });
 
         afterEach(() => {
@@ -28,9 +28,53 @@ if (Meteor.isServer) {
 	            	console.log("Hubo un error: ");
 	            	console.log(error);
 	            }
-	            console.log(product.length);
 	            chai.assert.equal(product.length, 0);
             });
         });
+
+        it('Can add a product', () => {
+            Meteor.call('products.insert','fakename','fake description','fakeurl' ,(error) => {
+                if(error){
+                    console.log("Hubo un error: ");
+                    console.log(error);
+                }
+                Meteor.call('products.show', (error, product) => {
+                    if(error){
+                        console.log("Hubo un error: ");
+                        console.log(error);
+                    }
+                    chai.assert.equal(product.length, 1);
+                });
+
+            });
+        });
+
+        it('Can remove a product', () => {
+            Meteor.call('products.insert','fakename','fake description','fakeurl' ,(error) => {
+                if(error){
+                    console.log("Hubo un error: ");
+                    console.log(error);
+                }
+                Meteor.call('products.show', (error, product) => {
+                    if(error){
+                        console.log("Hubo un error: ");
+                        console.log(error);
+                    }
+                    chai.assert.equal(product.length, 1);
+                    const idProd=product[0]._id
+                    console.log("id Prod "+idProd);
+                    console.log("owner "+product[0].owner);
+                    Meteor.call('products.remove', idProd,(error, product) => {
+                    if(error){
+                        console.log("Hubo un error: ");
+                        console.log(error);
+                    }
+                    chai.assert.equal(product.length, 0);
+                });
+                });
+
+            });
+        });
+
     });
 }

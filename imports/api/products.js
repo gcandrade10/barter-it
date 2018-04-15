@@ -78,18 +78,18 @@ Meteor.methods({
     check(urlImage, String);
  
     // Make sure the user is logged in before inserting a product
-    if (! this.userId) {
+    if (!Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
- 
+    const username = Meteor.user().username || Meteor.users.findOne(Meteor.userId()).profile.name;
     ProductsDB.insert({
       name,
       description,
       urlImage,
       active:true,
       createdAt: new Date(),
-      owner: this.userId,
-      username: Meteor.users.findOne(this.userId).profile.name,
+      owner: Meteor.userId(),
+      username,
     });
   },
 
@@ -98,7 +98,7 @@ Meteor.methods({
 
     const product = ProductsDB.findOne(productId);
     //Only owner can delete his comment
-    if(product.owner!==this.userId){
+    if(product.owner!==Meteor.userId()){
       throw new Meteor.Error('not-authorized');
     }
  
@@ -107,7 +107,7 @@ Meteor.methods({
 
   'products.show'() {
     return ProductsDB.find({
-      owner:this.userId,
+      owner:Meteor.userId(),
     }).fetch();
   },
 
