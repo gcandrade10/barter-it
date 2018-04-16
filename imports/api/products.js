@@ -82,7 +82,7 @@ Meteor.methods({
       throw new Meteor.Error('not-authorized');
     }
     const username = Meteor.user().username || Meteor.users.findOne(Meteor.userId()).profile.name;
-    ProductsDB.insert({
+    return ProductsDB.insert({
       name,
       description,
       urlImage,
@@ -95,7 +95,6 @@ Meteor.methods({
 
    'products.remove'(productId) {
     check(productId, String);
-
     const product = ProductsDB.findOne(productId);
     //Only owner can delete his comment
     if(product.owner!==Meteor.userId()){

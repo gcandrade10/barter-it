@@ -80,11 +80,11 @@ Meteor.methods({
       targets.push(ProductsDB.findOne(s).name);
     } 
 
-    if (! this.userId) {
+    if (! Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
-    TradesDB.insert({
-      id_from:this.userId,
+    return TradesDB.insert({
+      id_from:Meteor.userId(),
       offers_ids,
       offers_products,
       money,
@@ -93,7 +93,7 @@ Meteor.methods({
       targets,
       state:"pending",
       createdAt: new Date(),
-      usernameFrom: Meteor.users.findOne(this.userId).profile.name,
+      usernameFrom: Meteor.users.findOne(Meteor.userId()).profile.name,
       usernameTo,
     });
   },
@@ -111,7 +111,7 @@ Meteor.methods({
 
     old=TradesDB.findOne(tradeId);
 
-    if (! this.userId) {
+    if (! Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
     TradesDB.update(tradeId, { $set: { targets_ids: offers_ids } });

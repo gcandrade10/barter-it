@@ -1,7 +1,6 @@
 import { Meteor } from 'meteor/meteor';
 import { Inject } from "meteor/meteorhacks:inject-initial"
 
-import '../imports/api/tasks.js';
 import '../imports/api/trades.js';
 import '../imports/api/products.js';
 import { Accounts } from 'meteor/accounts-base';
