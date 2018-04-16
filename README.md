@@ -46,9 +46,9 @@ Follow these steps:
 ### Tests
 You can run the tests this way:
 
-	```
+	
 	meteor test --driver-package=cultofcoders:mocha --port 3100
-	```
+	
 
 Then go to your preferred browser and type "localhost:3100"
 ## Authors
