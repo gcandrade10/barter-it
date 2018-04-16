@@ -43,6 +43,12 @@ Follow these steps:
 6. Go to your preferred browser and type "localhost:3000"
 7. Voilà!!!!!
 
+### Tests
+You can run the tests this way:
+	```
+	meteor test --driver-package=cultofcoders:mocha --port 3100
+	```
+Then go to your preferred browser and type "localhost:3100"
 ## Authors
 * [__Germán Andrade__](https://github.com/gcandrade10)
 * [__Sergio Pardo__](https://github.com/sapardo10)
