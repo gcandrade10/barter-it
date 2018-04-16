@@ -40,8 +40,8 @@ Follow these steps:
 	```
 	meteor
 	```
-6. Go to your preferred browser and type "localhost:3000"
-7. Voilà!!!!!
+7. Go to your preferred browser and type "localhost:3000"
+8. Voilà!!!!!
 
 ### Tests
 You can run the tests this way:
@@ -49,6 +49,7 @@ You can run the tests this way:
 	```
 	meteor test --driver-package=cultofcoders:mocha --port 3100
 	```
+
 Then go to your preferred browser and type "localhost:3100"
 ## Authors
 * [__Germán Andrade__](https://github.com/gcandrade10)
