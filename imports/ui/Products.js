@@ -21,6 +21,7 @@ class Products extends Component
 
   render() {
   	this.someFunction();
+	  //Pueden mostrar al usuario que no tienen productos actualmente. Como algun popup o simplemente un texto.
     return (
 		<div className="container-background container-products-list container">
 	  	<h1>Products</h1>
