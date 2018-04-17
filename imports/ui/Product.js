@@ -143,6 +143,7 @@ class Product extends Component {
 	}
 }
 export default withTracker(() => {
+	//Por buenas practicas es bueno hacer solo un withTracker, están haciendo otro en Products.js
   Meteor.subscribe('Products');
   if(Meteor.user()){
     return {
