@@ -46,7 +46,7 @@ export default class Modal extends Component
       return ("");
     }
   }
-
+// se pueden hacer tests en el cliente
   render() {
     var modalClassName = classNames({
       "modal": true,
