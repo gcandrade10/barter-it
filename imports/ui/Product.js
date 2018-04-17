@@ -8,7 +8,8 @@ import {Meteor} from 'meteor/meteor';
 // Product component - represents a single product of a user
 
 class Product extends Component {
-
+	
+	// se puede comentar el código para que sea claro de entender
 	constructor(props)
 	{
 		super(props);
