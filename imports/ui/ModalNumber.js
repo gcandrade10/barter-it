@@ -13,7 +13,7 @@ export default class ModalNumber extends Component
       phone:"+57"
     };
   }
-
+//En general no me parece que le falte mucho de dise;o sino de organizacion un poco 
   renderFooter(){ 
       return(
               <div className="modal-footer">
