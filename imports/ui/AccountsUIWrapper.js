@@ -4,6 +4,7 @@ import { Template } from 'meteor/templating';
 import { Blaze } from 'meteor/blaze';
  
 export default class AccountsUIWrapper extends Component {
+ //Pueden agregarle un padding a la izquierda al boton de sign in parq que cambien un poco
   componentDidMount() {
     // Use Meteor Blaze to render login buttons
     this.view = Blaze.render(Template.loginButtons,
